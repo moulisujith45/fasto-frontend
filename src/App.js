@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter,Routes,Route,Link } from "react-router-dom"
+import { useState } from "react"
+import Home from "./Components/Home"
+import Dasbord from "./Components/Dasbord"
+import Register from "./Components/Register"
+import Login from "./Components/Login"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+function App(){
+  const[isLoggedIn,SetIsLoggedIn] = useState(false)
+
+  const handleLogin = () => {
+    SetIsLoggedIn(!isLoggedIn)
+  }
+
+  return(
+    <BrowserRouter>
+    <div>
+      <Link to ="/">Home</Link>
+      {!isLoggedIn ? (
+        <>
+        <Link to = "/register">Register</Link>
+        <Link to = "/login">Login</Link>
+        </>
+      ):(
+        <>
+        {isLoggedIn ? <button>Logout</button> : 
+        <button onClick={handleLogin}>Login</button>
+        }
+        </>
+      )}
+      {/*routes*/}
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/dashboard" element={<Dasbord/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register/>} />
+      </Routes>
+
     </div>
-  );
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
