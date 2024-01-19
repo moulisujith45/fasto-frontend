@@ -1,44 +1,97 @@
-
-import React, { useState } from 'react';
+import {useState} from 'react'
+import { isEmail } from 'validator'
 import axios from '../config/axios'
+import { useNavigate } from 'react-router-dom'
 
-export default function Register() {
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: ""
-  })
 
-  const handleChange = (e) => {
-    // You need to update the user state when input values change
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try{
-      const response = await axios.post('api/user/register',user)
-      console.log(response)
-      setUser({username:"",email:"",password:""})
-    }catch(e){
-      console.log(e)
+export default function Register({registerToast}){
+  const navigate = useNavigate()
+
+  const[username,setUsername] = useState("")
+  const[email,setEmail] = useState("")
+  const[password,setPassword] = useState("")
+  const[formErrors,setFormErrors] = useState({})
+
+
+  const errors = {}
+
+  function runValidations(){
+    if(username.trim().length === 0){
+      errors.username="username is required"
+    }else if(username.trim().length<4|| username.trim().length>64){
+      errors.username="username should be between 4-64 characters"
     }
-  };
-  return (
-    <div>
-      <h1>Sign UP!!</h1>
-      <h3>Create a new account</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username</label>
-        <input type="text" value={user.username} id="username" onChange={handleChange} />
-        <label htmlFor='email'>Email</label>
-        <input type="text" value={user.email} id="email" onChange={handleChange} />
-        <label htmlFor='password'>Password</label>
-        <input type="password" value={user.password} id="password" onChange={handleChange} />
-        <button type="submit">Submit</button>
-      </form>
+    if(email.trim().length ===0){
+      errors.email = "email is required"
+    }else if(!isEmail(email)){
+      errors.email = "invalid email format"
+    }else if(password.trim().length<8 || password.trim().length>128){
+      errors.password = "password should be between 8-128 characters"
+    }
+    setFormErrors(errors)
+  }
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    runValidations()
+
+    if(Object.keys(errors).length ===0){
+      setFormErrors({})
+
+      try{
+        const formData = {username,email,password,role:'customer'}
+        console.log(formData)
+        const response = await axios.post("/api/user/register",formData)
+        console.log(response.data)
+        console.log(formData)
+        navigate('/login')
+        registerToast()
+
+      }catch(e){
+        console.log(e)
+      }
+    }
+  }
+
+  return(
+    <div className="container">
+      <div className='row justify-content-center'>
+        <div className='col-6'>
+          <h2>register here...</h2>
+          <form onSubmit={handleSubmit}>
+            <div className='form-group'>
+              <label htmlFor='username' className='form-check-label'>username</label>
+              <input type='text' value={username} onChange={(e) => {
+                setUsername(e.target.value)
+              }}
+              className='form-control'
+              />
+
+            </div>
+            {formErrors.username && <span>{formErrors.username} </span>} <br/>
+            <div className='form-group'>
+              <label htmlFor="email" className='form-check-label'>email</label>
+              <input type='text' value={email} id="email" onChange={(e) => {
+                setEmail(e.target.value)
+              }}
+              className="form-control" />
+            </div>
+            {formErrors.email && <span>{formErrors.email}</span>} <br/>
+            <div className='form-group'>
+              <label htmlFor='password' className='form-check-label'>password</label>
+              <input type='password' value={password} id='password' 
+              onChange={(e) => {
+                setPassword(e.target.value)
+              }}
+              className='form-control' />
+            </div>
+            {formErrors.password && <span>{formErrors.password}</span>} <br/>
+
+
+            <input type="submit" value="register" />
+          </form>
+
+        </div>
+      </div>
     </div>
-  );
+  )
 }

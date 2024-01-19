@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Routes,Route,Link } from "react-router-dom"
 import { useState } from "react"
 import Home from "./Components/Home"
