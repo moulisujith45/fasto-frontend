@@ -1,7 +1,8 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { isEmail } from 'validator'
 import axios from '../config/axios'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 
 
 export default function Register({registerToast}){
@@ -11,6 +12,8 @@ export default function Register({registerToast}){
   const[email,setEmail] = useState("")
   const[password,setPassword] = useState("")
   const[formErrors,setFormErrors] = useState({})
+  const[mobile,setMobile] = useState('')
+  const[role,setRole] = useState("")
 
 
   const errors = {}
@@ -37,20 +40,53 @@ export default function Register({registerToast}){
     if(Object.keys(errors).length ===0){
       setFormErrors({})
 
+      const deliveryManformData = {
+        username,
+        email,
+        password,
+        role:"DeliveryMan",
+        mobile
+        
+      }
+
+     
+
       try{
-        const formData = {username,email,password,role:'customer'}
-        console.log(formData)
-        const response = await axios.post("/api/user/register",formData)
-        console.log(response.data)
-        console.log(formData)
-        navigate('/login')
-        registerToast()
+        if(role){
+          const response = await axios.post("/api/admin/deliverman/register",deliveryManformData,{
+            headers:{
+              Authorization:localStorage.getItem('token')
+    
+            }
+          })
+          console.log(response.data)
+          console.log(deliveryManformData)
+
+        }else{
+          const formData = {username,email,password,role:'customer'}
+          console.log(formData)
+          const response = await axios.post("/api/user/register",formData)
+          console.log(response.data)
+          console.log(formData)
+          navigate('/login')
+          registerToast()
+                    
+        }
 
       }catch(e){
         console.log(e)
       }
     }
   }
+
+  useEffect(()=>{
+    const token =localStorage.getItem("token")
+    if(token){
+      const {role} = jwtDecode(token)
+      if(role==="Admin") setRole(role)
+
+    }
+  },[])
 
   return(
     <div className="container">
@@ -84,6 +120,14 @@ export default function Register({registerToast}){
               }}
               className='form-control' />
             </div>
+            {role === "Admin" && 
+            <div className='deliveryMan-Number'>
+              <label>Phone Number</label> 
+              <input type="number" value={mobile} onChange={(e)=>setMobile(e.target.value)}/>
+
+            </div>
+            }
+
             {formErrors.password && <span>{formErrors.password}</span>} <br/>
 
 
