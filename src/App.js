@@ -47,7 +47,3 @@ function App(){
 
 export default App
 
-// <Route path='/' element={<Home/> }/>
-// <Route path='/register' element={<Register registerToast={registerToast}/>} />
-// <Route path='/register/customer' element={<Register registerToast={registerToast} /> }/>
-// <Route path='/login' element={<Login loginToast = {loginToast}  handleLogin = {handleLogin}/>}/>
