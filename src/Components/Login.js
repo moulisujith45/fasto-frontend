@@ -13,7 +13,7 @@ const loginValidationSchema = yup.object({
 
 export default function Login(props){
     const navigate = useNavigate()
-    const { handleLogin, loginToast } = props
+    // const { handleLogin, loginToast } = props
 
     const formik = useFormik({
         initialValues : {
@@ -31,8 +31,8 @@ export default function Login(props){
                 localStorage.setItem('token', response.data.token )
                 const {role} = jwtDecode(localStorage.getItem("token"))
                 
-                if(role == 'Admin') navigate('/admin')
-                if(role == "customer") navigate('/')
+                if(role === 'Admin') navigate('/admin')
+                if(role === "customer") navigate('/')
                 
                
                 // navigate('/')
