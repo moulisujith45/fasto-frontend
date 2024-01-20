@@ -2,7 +2,7 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from '../config/axios'
+import axios from '.../config/axios'
 import './login.css'
 
 const loginValidationSchema = yup.object({

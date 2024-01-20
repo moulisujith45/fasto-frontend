@@ -4,7 +4,7 @@ import { useState } from "react"
 import Home from "./Components/Home"
 import Dasbord from "./Components/Dasbord"
 import Register from "./Components/Register"
-import Login from "./Components/Login"
+import Login from "./Components/LoginComponents/Login"
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
