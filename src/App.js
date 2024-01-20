@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Routes,Route,Link } from "react-router-dom"
+import {ToastContainer, toast} from 'react-toastify'
 import { useState } from "react"
 import Home from "./Components/Home"
 import Dasbord from "./Components/Dasbord"
@@ -9,9 +10,20 @@ import Login from "./Components/Login"
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
 
+
+  const registerToast = ()=>{
+    toast('registerd successfully')
+  }
+
+  const loginToast =() =>{
+    toast('logged in succesfully')
+  }
+
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)
   }
+
+
 
   return(
     <BrowserRouter>
@@ -33,8 +45,8 @@ function App(){
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/dashboard" element={<Dasbord/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/login" element={<Login loginToast = {loginToast} />} />
+        <Route path="/register" element={<Register registerToast={registerToast} />} />
       </Routes>
 
     </div>
@@ -43,3 +55,8 @@ function App(){
 }
 
 export default App
+
+// <Route path='/' element={<Home/> }/>
+// <Route path='/register' element={<Register registerToast={registerToast}/>} />
+// <Route path='/register/customer' element={<Register registerToast={registerToast} /> }/>
+// <Route path='/login' element={<Login loginToast = {loginToast}  handleLogin = {handleLogin}/>}/>

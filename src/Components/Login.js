@@ -47,7 +47,7 @@ export default function Login(props){
                 <h2 className='mb-3' >Login</h2>
                 <form className='form-validation' onSubmit={formik.handleSubmit} >
                     <div className='form-group mb-2' >
-                        <label className='form-group mb-2'>Email</label>
+                        <label className='form-group mb-2'>Email</label><br />
                         <input 
                         type='text'
                         value={formik.values.email}
