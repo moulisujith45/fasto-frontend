@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../config/axios'
 import './login.css'
-
+import { jwtDecode } from "jwt-decode"
 const loginValidationSchema = yup.object({
     email : yup.string().email().required("email is required"),
     password : yup.string().required("password is required").min(8).max(128)
@@ -28,12 +28,14 @@ export default function Login(props){
                 console.log(formData)
                 const response = await axios.post('/api/user/login', formData)
                 console.log(response.data)
-                localStorage.setItem('token', response.data.token)
-                handleLogin()
-                loginToast()
-                navigate('/')
-
-
+                localStorage.setItem('token', response.data.token )
+                const {role} = jwtDecode(localStorage.getItem("token"))
+                
+                if(role == 'Admin') navigate('/admin')
+                if(role == "customer") navigate('/')
+                
+               
+                // navigate('/')
             } catch(e) {
                 console.log(e)
             }

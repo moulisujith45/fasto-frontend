@@ -5,13 +5,28 @@ import Home from "./Components/Home"
 import Dasbord from "./Components/Dasbord"
 import Register from "./Components/Register"
 import Login from "./Components/Login"
+import AdminHome from './Components/AdminComponent/Admin-Home';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
+  // const[isAdmin,setIsAdmin] = useState(false)
+  // const[IsCustomer,setIsCustomer] = useState(flase)
 
-  const handleLogin = () => {
-    SetIsLoggedIn(!isLoggedIn)
-  }
+  // const registerToast = ()=>{
+  //   toast('registerd successfully')
+  // }
+  // const handleLogin = () => {
+  //   SetIsLoggedIn(!isLoggedIn)
+  //   if(useData){
+  //     setIsAdmin(userData.role === 'Admin')
+  //     setIsCustomer(userData.role === 'customer')
+  //   }else{
+  //     console.log('Invalid userData:',userData)
+  //   }
+  // }
+  // const loginToast =() =>{
+  //   toast('logged in succesfully')
+  // }
 
   return(
     <BrowserRouter>
@@ -25,7 +40,7 @@ function App(){
       ):(
         <>
         {isLoggedIn ? <button>Logout</button> : 
-        <button onClick={handleLogin}>Login</button>
+        <button >Login</button>
         }
         </>
       )}
@@ -35,6 +50,8 @@ function App(){
         <Route path="/dashboard" element={<Dasbord/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
+        <Route path="/admin" element={<AdminHome/>} />
+
       </Routes>
 
     </div>
