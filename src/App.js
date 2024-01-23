@@ -7,6 +7,8 @@ import Dasbord from "./Components/Dasbord"
 import Register from "./Components/Register"
 import Login from "./Components/Login"
 import AdminHome from './Components/AdminComponent/Admin-Home';
+import Category from './Components/Categories';
+import AdminNavbar from './Components/Navbar/AdminNavbar';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -16,21 +18,10 @@ function App(){
   }
 
   return(
+  
     <BrowserRouter>
-    <div>
-      <Link to ="/">Home</Link>
-      {!isLoggedIn ? (
-        <>
-        <Link to = "/register">Register</Link>
-        <Link to = "/login">Login</Link>
-        </>
-      ):(
-        <>
-        {isLoggedIn ? <button>Logout</button> : 
-        <button >Login</button>
-        }
-        </>
-      )}
+      <div className='app'>
+       <AdminNavbar/>
       {/*routes*/}
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -38,10 +29,12 @@ function App(){
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
+        <Route path='/categories' element={<Category/>}/>
       </Routes>
 
     </div>
     </BrowserRouter>
+ 
   )
 }
 
