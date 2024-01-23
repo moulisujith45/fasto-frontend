@@ -96,7 +96,7 @@ export default function Register({registerToast}){
           <form onSubmit={handleSubmit}>
             <div className='form-group'>
               <label htmlFor='username' className='form-check-label'>username</label>
-              <input type='text' value={username} onChange={(e) => {
+              <input type='text' value={username} id="username" onChange={(e) => {
                 setUsername(e.target.value)
               }}
               className='form-control'
