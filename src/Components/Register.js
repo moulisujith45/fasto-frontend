@@ -121,8 +121,8 @@ export default function Register({registerToast}){
               className='form-control' />
             </div>
             {role === "Admin" && 
-            <div className='form-group'>
-              <label htmlFor='number' className='form-check-label'>Phone Number</label> 
+            <div className='deliveryMan-Number'>
+              <label>Phone Number</label> 
               <input type="number" value={mobile} onChange={(e)=>setMobile(e.target.value)}/>
 
             </div>
