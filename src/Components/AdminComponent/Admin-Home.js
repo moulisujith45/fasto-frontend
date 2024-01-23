@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 function AdminHome ()  {
     const navigate= useNavigate()
+    
   const handleLogout = () => {
+    localStorage.removeItem('token')
+    alert("logout successfully")
     // Handle logout logic
   };
 

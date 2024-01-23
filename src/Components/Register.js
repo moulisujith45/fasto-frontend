@@ -49,8 +49,6 @@ export default function Register({registerToast}){
         
       }
 
-     
-
       try{
         if(role){
           const response = await axios.post("/api/admin/deliverman/register",deliveryManformData,{

@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminNavbar = ({ handleLogout, handleAddDeliveryMan }) => {
+  const handleAdminLogout = () => {
+
+    handleLogout()
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -15,7 +19,7 @@ const AdminNavbar = ({ handleLogout, handleAddDeliveryMan }) => {
               <button className="btn btn-primary mr-2" onClick={handleAddDeliveryMan}>Add Delivery Man</button>
             </li>
             <li className="nav-item">
-              <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+              <button className="btn btn-danger" onClick={handleAdminLogout}>Logout</button>
             </li>
           </ul>
         </div>
