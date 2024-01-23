@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AdminNavbar = ({ handleLogout, handleAddDeliveryMan }) => {
+const AdminNavbar = ({ handleLogout, handleAddDeliveryMan , handleAddCategory }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -16,6 +16,9 @@ const AdminNavbar = ({ handleLogout, handleAddDeliveryMan }) => {
             </li>
             <li className="nav-item">
               <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+            </li>
+            <li className="nav-iteam">
+              <button className='btn btn-info'  onClick={handleAddCategory}>Add Category</button>
             </li>
           </ul>
         </div>

@@ -86,7 +86,7 @@ export default function Register({registerToast}){
       if(role==="Admin") setRole(role)
 
     }
-  },[])
+  },[localStorage.getItem("token")])
 
   return(
     <div className="container">
@@ -101,7 +101,6 @@ export default function Register({registerToast}){
               }}
               className='form-control'
               />
-
             </div>
             {formErrors.username && <span>{formErrors.username} </span>} <br/>
             <div className='form-group'>
@@ -120,20 +119,18 @@ export default function Register({registerToast}){
               }}
               className='form-control' />
             </div>
+            <br/>
             {role === "Admin" && 
-            <div className='deliveryMan-Number'>
-              <label>Phone Number</label> 
-              <input type="number" value={mobile} onChange={(e)=>setMobile(e.target.value)}/>
-
+            <div className='form-group'>
+              <label htmlFor='number' className='form-check-label'>Phone Number</label> 
+              <input type="number" value={mobile} id='number'
+               onChange={(e)=>setMobile(e.target.value)}
+               className='form-control'/>
             </div>
             }
-
             {formErrors.password && <span>{formErrors.password}</span>} <br/>
-
-
             <input type="submit" value="register" />
           </form>
-
         </div>
       </div>
     </div>
