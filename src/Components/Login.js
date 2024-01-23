@@ -33,11 +33,13 @@ export default function Login(props){
                 
                 if(role === 'Admin') navigate('/admin')
                 if(role === "customer") navigate('/')
+                if(role === "DeliveryMan") navigate('/admin')
                 
                
                 // navigate('/')
             } catch(e) {
                 console.log(e)
+                
             }
         }
     })
