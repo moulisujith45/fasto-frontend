@@ -7,8 +7,8 @@ import Dasbord from "./Components/Dasbord"
 import Register from "./Components/Register"
 import Login from "./Components/Login"
 import AdminHome from './Components/AdminComponent/Admin-Home';
-import Category from './Components/Categories';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
+import AddCategory from './Components/AdminComponent/Category/AddCategory';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -29,7 +29,7 @@ function App(){
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
-        <Route path='/addcategories' element={<Category/>}/>
+        <Route path='/addcategories' element={<AddCategory/>}/>
       </Routes>
 
     </div>
