@@ -59,12 +59,12 @@ const AdminNavbar = () => {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
-            <li className="nav-item">
+            {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to= "/login">Login</Link>
-            </li>
-            <li className="nav-item">
+            </li>}
+            {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to='/register'>Register</Link>
-            </li>
+            </li>}
             {/* <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/register">Add DeliveryMan</Link>   
             </li>
