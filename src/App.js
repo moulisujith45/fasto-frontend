@@ -9,6 +9,9 @@ import Login from "./Components/Login"
 import AdminHome from './Components/AdminComponent/Admin-Home';
 import Category from './Components/Categories';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
+import MyCart from './Components/MyCart';
+import Orders from './Components/orders';
+import CustomerProfile from './Components/CustomerProfile';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -30,6 +33,9 @@ function App(){
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
         <Route path='/addcategories' element={<Category/>}/>
+        <Route path='/mycart' element={<MyCart/>}/>
+        <Route path='/orders' element={<Orders/>}/>
+        <Route path='/customerprofile' element={<CustomerProfile/>}/>
       </Routes>
 
     </div>

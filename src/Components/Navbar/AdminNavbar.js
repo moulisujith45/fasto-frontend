@@ -1,6 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import {useState,useEffect} from 'react';
 import { Link , useNavigate } from 'react-router-dom';
+import fastologo from '../images/fastologo.jpg'
 const AdminNavbar = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -17,6 +18,11 @@ const AdminNavbar = () => {
           if (role === "Admin") {
             setRole(role);
             SetIsLoggedIn(true)
+          }else if(role === 'customer'){
+            setRole(role)
+            SetIsLoggedIn(true)
+          }else if(role === 'DeliveryMan'){
+
           }
         } catch (e) {
           console.log("Invalid or expired token");
@@ -38,6 +44,13 @@ const AdminNavbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         {/* <Link to="/admin" className="navbar-brand">Admin Dashboard</Link> */}
+        <nav class="navbar bg-body-tertiary">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img src={fastologo} alt='logo'  width="50" height="50" />
+          </Link>
+        </div>
+        </nav>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -59,8 +72,8 @@ const AdminNavbar = () => {
               <Link className="nav-link active" aria-current="page" to="/categories">Add Categories</Link>
             </li> */}
              {role === 'Admin' ? (
-
-            <div className="collapse navbar-collapse" id="navbarsupportedcontent">
+               
+               <div className="collapse navbar-collapse" id="navbarsupportedcontent">
               <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
 
               <li className="nav-item">
@@ -83,6 +96,21 @@ const AdminNavbar = () => {
           </form>
         </div>
         </div>
+             {role === 'customer' ? (
+              <div className="collapse navbar-collapse" id="navbarsupportedcontent">
+               <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+               <li className="nav-iteam">
+                 <Link className="nav-link active" to="/orders">Orders</Link>
+               </li>
+               <li className="nav-iteam">
+                 <Link className="nav-link active" to="customerprofile">Profile</Link>
+               </li>
+               <li className="nav-iteam">
+                 <Link className="nav-link active" to="mycart">Cart</Link>
+               </li>
+               </ul>
+              </div>
+             ):null}
            {isLoggedIn === true ? 
           <div className="ml-auto">
            <ul className="navbar-nav">
