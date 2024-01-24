@@ -9,7 +9,19 @@ const categoryReducer = (state = categoryInitialState, action) => {
             // console.log(action.payload)
             return[...state,...action.payload]
         }
-        
+        case "REMOVE_CATEGORY": {
+            return state.filter(ele => ele._id !== action.payload)
+            
+        }   
+        case 'EDIT_CATEGORY': {
+            return state.map((ele)=> {
+                if(ele._id === action.payload._id){
+                    return{...ele,name : action.payload.name}
+                }else{
+                    return {...ele}
+                }
+            })
+        }
         default: {
             return [...state]
         }

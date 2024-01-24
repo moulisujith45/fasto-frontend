@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom"
 
-import { startGetCategory } from "../../../actions/categoryAction"
+import { startEditCategory, startGetCategory, startRemoveCategory } from "../../../actions/categoryAction"
 
 const CategoryList = (props) => {
+    const [editId, setEditId] = useState(false)
+    const [name, setName] = useState('')
+
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const category = useSelector((state) => {
@@ -16,15 +21,55 @@ const CategoryList = (props) => {
         dispatch(startGetCategory())
     },[dispatch])
 
+    const handleDelete = (id) => {
+        const confirm = window.confirm("Are you sure?")
+        if(confirm){
+            dispatch(startRemoveCategory(id))
+        }
+    }
+
+    const handleEdit = (id) => {
+        setEditId(id)
+        setName('')
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const formData = {
+            name: name
+        }
+        dispatch(startEditCategory(editId, formData))
+        setEditId('')
+    }
+
     return(
         <div>
             <ul>
                 {category.map((ele) => {
                     return <li key={ele._id}>{ele.name}
-                    <button>Edit</button>
-                    <button>Delete</button></li>
+                    <button onClick={() => {
+                        handleEdit(ele._id)
+                    }}>Edit</button>
+                    <button onClick={() => {
+                        handleDelete(ele._id)
+                    }}>Delete</button></li>
                 })}
             </ul>
+
+            {editId && (
+                <form onSubmit={handleSubmit}>
+                    <label>Name</label>
+                    <input 
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }} /> <br />
+
+                    <input type="submit" />
+
+                </form>
+            )}
         </div>
     )
 

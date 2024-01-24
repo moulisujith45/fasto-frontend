@@ -56,9 +56,9 @@ const AdminNavbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarsupportedcontent">
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+           {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-            </li>
+            </li>}
             {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to= "/login">Login</Link>
             </li>}

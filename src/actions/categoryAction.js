@@ -44,3 +44,55 @@ export const startGetCategory = () => {
         }
     }
 }
+
+export const startRemoveCategory = (id) => {
+    return async(dispatch) => {
+        if(!id) {
+            console.error("missing category ID for deletion")
+        }
+
+        try {
+            const response = await axios.delete(`/api/admin/category/${id}`,{
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            dispatch(removeCategory(id))
+        } catch(e){
+            console.log(e)
+        }
+    }
+}
+
+const removeCategory = (id) => {
+    return {
+        type: 'REMOVE_CATEGORY',
+        payload: id
+    }
+}
+
+export const startEditCategory = (id, formData) => {
+    return async(dispatch) => {
+        if(!id){
+            console.error('Missing category id to edit')
+        }
+        try {
+            const response = await axios.put(`/api/admin/updateCategory/${id}`, formData, {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            dispatch(editCategory(response.data))
+            console.log(response.data)
+        } catch(e){
+            console.log(e)
+        }
+    }
+}
+
+const editCategory = (data) => {
+    return{
+        type: 'EDIT_CATEGORY',
+        payload: data
+    }
+}

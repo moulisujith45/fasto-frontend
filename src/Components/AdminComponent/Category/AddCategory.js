@@ -52,6 +52,7 @@ export default function AddCategory(){
                 <input  type="submit"  />
 
             </form>
+            <br />
             <CategoryList/>
         </div>
     )
