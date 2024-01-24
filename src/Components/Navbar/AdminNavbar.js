@@ -98,8 +98,8 @@ const AdminNavbar = () => {
         </div>
         </div>
              {role === 'customer' ? (
-              <div className="collapse navbar-collapse" id="navbarsupportedcontent">
-               <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+              <div className="ml-auto" id="navbarsupportedcontent">
+               <ul className="navbar-nav ">
                <li className="nav-iteam">
                  <Link className="nav-link active" to="/orders">Orders</Link>
                </li>
