@@ -45,7 +45,7 @@ const AdminNavbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         {/* <Link to="/admin" className="navbar-brand">Admin Dashboard</Link> */}
-        <nav class="navbar bg-body-tertiary">
+        <nav className="navbar bg-body-tertiary">
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img src={fastologo} alt='logo'  width="50" height="50" />
@@ -60,12 +60,12 @@ const AdminNavbar = () => {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
-            <li className="nav-item">
+            {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to= "/login">Login</Link>
-            </li>
-            <li className="nav-item">
+            </li>}
+            {!token && <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to='/register'>Register</Link>
-            </li>
+            </li>}
             {/* <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/register">Add DeliveryMan</Link>   
             </li>

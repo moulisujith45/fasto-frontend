@@ -33,6 +33,7 @@ function App(){
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
         <Route path='/addcategories' element={<AddCategory/>}/>
+        {/* <Route path='/addcategories' element={<Category/>}/> */}
         <Route path='/mycart' element={<MyCart/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
