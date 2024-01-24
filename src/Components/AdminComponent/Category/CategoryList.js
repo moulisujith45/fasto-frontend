@@ -20,7 +20,9 @@ const CategoryList = (props) => {
         <div>
             <ul>
                 {category.map((ele) => {
-                    return <li key={ele._id}>{ele.name}</li>
+                    return <li key={ele._id}>{ele.name}
+                    <button>Edit</button>
+                    <button>Delete</button></li>
                 })}
             </ul>
         </div>

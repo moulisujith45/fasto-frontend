@@ -44,7 +44,7 @@ const AdminNavbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         {/* <Link to="/admin" className="navbar-brand">Admin Dashboard</Link> */}
-        <nav class="navbar bg-body-tertiary">
+        <nav className="navbar bg-body-tertiary">
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img src={fastologo} alt='logo'  width="50" height="50" />
