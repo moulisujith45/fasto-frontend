@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode'
 
 export default function Register({registerToast}){
   const navigate = useNavigate()
+  const token = localStorage.getItem("token");
 
   const[username,setUsername] = useState("")
   const[email,setEmail] = useState("")
@@ -77,14 +78,20 @@ export default function Register({registerToast}){
     }
   }
 
-  useEffect(()=>{
-    const token =localStorage.getItem("token")
-    if(token){
-      const {role} = jwtDecode(token)
-      if(role==="Admin") setRole(role)
-
+  useEffect(() => {
+      
+    if (token) {
+      try {
+        const { role } = jwtDecode(token);
+        console.log(role);
+        if (role === "Admin") {
+          setRole(role);
+        }
+      } catch (e) {
+        console.log("Invalid or expired token");
+      }
     }
-  },[localStorage.getItem("token")])
+  }, [token]);
 
   return(
     <div className="container">

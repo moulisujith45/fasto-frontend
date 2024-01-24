@@ -29,7 +29,7 @@ function App(){
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
-        <Route path='/categories' element={<Category/>}/>
+        <Route path='/addcategories' element={<Category/>}/>
       </Routes>
 
     </div>
