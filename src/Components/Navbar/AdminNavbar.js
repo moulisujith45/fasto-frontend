@@ -86,6 +86,9 @@ const AdminNavbar = () => {
               <li className="nav-item">
                 <Link className="nav-link active" to="/admin">Admin Dashboard</Link>
               </li>
+              <li className="nav-iteam">
+                <Link className="nav-link active" to="/addproducts">Add Product</Link>
+              </li>
               </ul>
             </div>
              ):null}
