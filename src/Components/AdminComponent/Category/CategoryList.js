@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState} from "react"
+import { v4 as uuidv4 } from 'uuid';
+
 // import { useNavigate } from "react-router-dom"
 
 import { startEditCategory, startGetCategory, startRemoveCategory } from "../../../actions/categoryAction"
@@ -44,6 +46,7 @@ const CategoryList = (props) => {
 
     return(
         <div>
+           { console.log(category)}
             <ul>
                 {category.map((ele) => {
                     return <li key={ele._id}>{ele.name}

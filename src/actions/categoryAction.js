@@ -38,7 +38,7 @@ export const startGetCategory = () => {
 
             })
             dispatch(getCategory(response.data))
-            // console.log(response.data)
+            // console.log(response.data,"in action")
         } catch(err){
             console.log(err)
         }
