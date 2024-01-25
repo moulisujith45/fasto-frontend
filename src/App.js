@@ -11,7 +11,7 @@ import AdminNavbar from './Components/Navbar/AdminNavbar';
 import AddCategory from './Components/AdminComponent/Category/AddCategory';
 import MyCart from './Components/MyCart';
 import Orders from './Components/orders';
-import CustomerProfile from './Components/CustomerProfile';
+import CustomerProfile from './Components/UserProfile/CustomerProfile';
 import AddProduct from './Components/AdminComponent/Product/AddProduct';
 
 function App(){
