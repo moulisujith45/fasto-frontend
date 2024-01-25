@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState} from "react"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 
 import { startEditCategory, startGetCategory, startRemoveCategory } from "../../../actions/categoryAction"
 
@@ -9,7 +9,7 @@ const CategoryList = (props) => {
     const [name, setName] = useState('')
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
     const category = useSelector((state) => {
