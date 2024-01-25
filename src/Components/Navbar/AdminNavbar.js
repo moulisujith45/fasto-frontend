@@ -2,13 +2,13 @@ import { jwtDecode } from 'jwt-decode';
 import {useState,useEffect} from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import fastologo from '../images/fastologo.jpg'
+// import Context from '../../ContextApi/Context';
 const AdminNavbar = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const initialRole = token ? jwtDecode(token).role : "";
     const [role, setRole] = useState(initialRole);
     const [isLoggedIn,SetIsLoggedIn] = useState(false)
-  
     useEffect(() => {
       
       
@@ -29,7 +29,7 @@ const AdminNavbar = () => {
           console.log("Invalid or expired token");
         }
       }
-    }, [token]); // Update the dependency array // Update the dependency array
+    }, [token]); // Update the dependency array
 
   const handleLogout = () => {
     setRole("")
@@ -39,7 +39,7 @@ const AdminNavbar = () => {
     navigate('/')
     // Handle logout logic
   };
-  console.log("role1",role)
+  
   return (
   
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -72,7 +72,7 @@ const AdminNavbar = () => {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/categories">Add Categories</Link>
             </li> */}
-             {role === 'Admin' ? (
+             {setRole === 'Admin' ? (
                
                <div className="collapse navbar-collapse" id="navbarsupportedcontent">
               <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
@@ -100,7 +100,7 @@ const AdminNavbar = () => {
           </form>
         </div>
         </div>
-             {role === 'customer' ? (
+             {setRole === 'customer' ? (
               <div className="ml-auto" id="navbarsupportedcontent">
                <ul className="navbar-nav ">
                <li className="nav-iteam">
@@ -115,7 +115,7 @@ const AdminNavbar = () => {
                </ul>
               </div>
              ):null}
-           {isLoggedIn === true ? 
+           {SetIsLoggedIn === true ? 
           <div className="ml-auto">
            <ul className="navbar-nav">
            <li className="nav-item">
@@ -127,6 +127,7 @@ const AdminNavbar = () => {
       </div>
     </nav>
   );
+  
 };
 
 export default AdminNavbar;

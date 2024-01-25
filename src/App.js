@@ -13,6 +13,8 @@ import MyCart from './Components/MyCart';
 import Orders from './Components/orders';
 import CustomerProfile from './Components/CustomerProfile';
 import AddProduct from './Components/AdminComponent/Product/AddProduct';
+import ContextStore from './ContextApi/ContextStore';
+
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -22,8 +24,10 @@ function App(){
   }
 
   return(
-  
+    
     <BrowserRouter>
+      <ContextStore>
+
       <div className='app'>
        <AdminNavbar/>
       {/*routes*/}
@@ -42,6 +46,7 @@ function App(){
       </Routes>
 
     </div>
+      </ContextStore>
     </BrowserRouter>
  
   )
