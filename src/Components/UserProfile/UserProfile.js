@@ -1,32 +1,119 @@
-import React from "react"
-import {useState,useEffect} from "react"
-import { jwtDecode } from "jwt-decode"
-import { useNavigate } from "react-router-dom"
-import axios from "../../config/axios"
-export default function CustomerProfile(){
-    const navigate = useNavigate()
-    const token = localStorage.getItem('token')
-    const initialRole = token ? jwtDecode(token).role:''
-    const [role,setRole] = useState(false)
-    const [isLoggedIn,SetIsLoggedIn] = useState(false)
+import axios from "../../config/axios";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-    useEffect(() => {
-       if(token){
-        try{
-            const{role} = jwtDecode(token)
-            if(role === 'Admin' || role === 'customer' || role ==="Delivery"){
-                setRole(role)
-                SetIsLoggedIn(true)
-            }
-        }catch(e){
-            console.log('Invalid or expired token')
+
+const UserProfile = () => {
+    const user = useSelector((state) => state.user) || {};
+    const [password, setPassword] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+        errors: {}
+    });
+
+    const runValidators = () => {
+        const { currentPassword, newPassword, confirmPassword } = password;
+        const errors = {};
+
+        if (currentPassword.trim().length < 7 || currentPassword.trim().length > 128) {
+            errors.currentPassword = "Password should be between 8 to 128 characters";
         }
-       }
+        if (newPassword.trim().length < 8 || newPassword.trim().length > 128) {
+            errors.newPassword = "Password should be between 8 to 128 characters";
+        }
+        if (confirmPassword.trim().length < 8 || confirmPassword.trim().length > 128) {
+            errors.confirmPassword = "Password should be between 8 to 128 characters";
+        }
+        if (newPassword !== confirmPassword) {
+            errors.match = "Current password and new password do not match";
+        }
 
-    },[token])
-    return(
-        <div>
-            <h1>Profile Component</h1>
+        setPassword({ ...password, errors });
+        return errors;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setPassword({ ...password, [name]: value });
+    };
+
+    const handleProfileSubmit = async (e) => {
+        e.preventDefault();
+        // Handle profile update form submission logic here
+    };
+
+    const handlePasswordSubmit = async (e) => {
+        e.preventDefault();
+        const errors = runValidators();
+
+        if (Object.keys(errors).length === 0) {
+            try {
+                const response = await axios.put('api/user/profile/editProfile', password, {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                });
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+    return (
+        <div className="update-profile">
+            <div>
+                <h5 className="mb-4">Update Profile</h5>
+                <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handleProfileSubmit}>
+                    <div className="mb-3 col">
+                        <label className="form-label">Username</label>
+                        <input type="text" className="form-control" placeholder={user.username} disabled required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="mb-3 col">
+                        <label className="form-label">Email</label>
+                        <input type="text" className="form-control" placeholder={user.email} disabled required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <button className="btn btn-primary" type="submit">Save Profile</button>
+                    </div>
+                </form>
+            </div>
+            <div className="pe-lg-14">
+                <h5 className="mb-4">Change Password</h5>
+                <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handlePasswordSubmit}>
+                    <div className="mb-3 col">
+                        <label className="form-label">Current Password</label>
+                        <input type="password" className="form-control" placeholder="Enter Old Password" name="currentPassword" value={password.currentPassword} onChange={handleChange} required />
+                        {password.errors.currentPassword && <div>{password.errors.currentPassword}</div>}
+                    </div>
+                    <div className="mb-3 col">
+                        <label className="form-label">New Password</label>
+                        <input type="password" className="form-control" placeholder="Enter New Password" name="newPassword" value={password.newPassword} onChange={handleChange} required />
+                        {password.errors.newPassword && <div>{password.errors.newPassword}</div>}
+                    </div>
+                    <div className="mb-3 col">
+                        <label className="form-label">Confirm Password</label>
+                        <input type="password" className="form-control" placeholder="Confirm password" name="confirmPassword" value={password.confirmPassword} onChange={handleChange} required />
+                        {password.errors.confirmPassword && <div>{password.errors.confirmPassword}</div>}
+                        {password.errors.match && <div>{password.errors.match}</div>}
+                    </div>
+                    <div className="col-12">
+                        <p className="mb-4">
+                            Can’t remember your current password? <a href="#">Reset your password.</a>
+                        </p>
+                        <button className="btn btn-primary" type="submit">Save Password</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    )
-}
+    );
+};
+
+export default UserProfile;
