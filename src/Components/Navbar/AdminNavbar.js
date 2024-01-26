@@ -25,7 +25,6 @@ const AdminNavbar = () => {
           }else if(role === 'DeliveryMan'){
             setRole(role)
             SetIsLoggedIn(true)
-
           }
         } catch (e) {
           console.log("Invalid or expired token");
