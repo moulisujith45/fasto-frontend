@@ -52,7 +52,7 @@ export const startRemoveCategory = (id) => {
         }
 
         try {
-            const response = await axios.delete(`/api/admin/category/${id}`,{
+            await axios.delete(`/api/admin/category/${id}`,{
                 headers: {
                     Authorization: localStorage.getItem('token')
                 }
