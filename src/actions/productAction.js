@@ -66,3 +66,29 @@ export const startRemoveProduct = (id) => {
     }
 }
 
+const editProduct = (data) => {
+    return {
+        type: "EDIT_PRODUCT",
+        payload: data
+    }
+}
+
+export const startEditProduct = (id, formData) => {
+    return async(dispatch) => {
+        if(!id) {
+            console.error('Missing product ID to edit')
+        }
+        try {
+            const response = await axios.put(`/api/admin/product/${id}`, formData, {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            dispatch(editProduct(response.data))
+            console.log(response.data)
+        } catch(err){
+            console.log(err)
+        }
+    }
+}
+

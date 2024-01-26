@@ -1,10 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect} from "react"
+import { useEffect, useState} from "react"
 // import { useNavigate } from "react-router-dom"
 
-import { startGetProduct, startRemoveProduct } from "../../../actions/productAction"
+import { startEditProduct, startGetProduct, startRemoveProduct } from "../../../actions/productAction"
 
 const ProductList = (props) => {
+
+    const [editId, setEditId] = useState(false)
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
+    const [stock, setStock] = useState('')
 
     const dispatch = useDispatch()
 
@@ -23,6 +29,24 @@ const ProductList = (props) => {
         }
     }
 
+    const handleEdit = (id) => {
+        setEditId(id)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const formData = {
+            name: name,
+            description: description,
+            price: price,
+            stock:stock
+        }
+        dispatch(startEditProduct(editId, formData))
+        setEditId('')
+    }
+
+
+
     return(
         <div>
             <ul>
@@ -35,10 +59,52 @@ const ProductList = (props) => {
                         <button onClick={() => {
                             handleDelete(ele._id)
                         }}>Delete</button>
+                        <button onClick={() => {
+                            handleEdit(ele._id)
+                        }}>Edit</button>
                     </div>
                         )
                 })}
             </ul>
+
+            {editId && (
+                <form onSubmit={handleSubmit}>
+                    <label>Name</label>
+                    <input 
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }} /> <br />
+
+                    <label>Description</label>
+                    <input 
+                    type="text"
+                    value={description}
+                    onChange={(e) => {
+                        setDescription(e.target.value)
+                    }} /> <br />
+
+                    <label>price</label>
+                    <input 
+                    type="Number"
+                    value={price}
+                    onChange={(e) => {
+                        setPrice(e.target.value)
+                    }} /> <br />
+
+                    <label>stock</label>
+                    <input 
+                    type="Number"
+                    value={stock}
+                    onChange={(e) => {
+                        setStock(e.target.value)
+                    }}
+                    /> <br />
+
+                     <input type="submit" />
+                </form>
+            )}
         </div>
     )
 }
