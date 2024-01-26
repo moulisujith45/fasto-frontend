@@ -1,6 +1,6 @@
 import axios from "../../config/axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";//not Redux but context api
 
 
 const UserProfile = () => {
@@ -62,31 +62,22 @@ const UserProfile = () => {
     };
 
     return (
-        <div className="update-profile">
+        <div className="pe-lg-14">
             <div>
                 <h5 className="mb-4">Update Profile</h5>
                 <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handleProfileSubmit}>
                     <div className="mb-3 col">
                         <label className="form-label">Username</label>
                         <input type="text" className="form-control" placeholder={user.username} disabled required />
-                        <div className="valid-feedback">
-                            Looks good!
-                        </div>
                     </div>
                     <div className="mb-3 col">
                         <label className="form-label">Email</label>
                         <input type="text" className="form-control" placeholder={user.email} disabled required />
-                        <div className="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <button className="btn btn-primary" type="submit">Save Profile</button>
                     </div>
                 </form>
             </div>
             <div className="pe-lg-14">
-                <h5 className="mb-4">Change Password</h5>
+                <h5 className="mb-6">Change Password</h5>
                 <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handlePasswordSubmit}>
                     <div className="mb-3 col">
                         <label className="form-label">Current Password</label>

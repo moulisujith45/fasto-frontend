@@ -23,6 +23,8 @@ const AdminNavbar = () => {
             setRole(role)
             SetIsLoggedIn(true)
           }else if(role === 'DeliveryMan'){
+            setRole(role)
+            SetIsLoggedIn(true)
 
           }
         } catch (e) {
