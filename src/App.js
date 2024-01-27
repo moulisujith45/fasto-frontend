@@ -13,6 +13,7 @@ import MyCart from './Components/MyCart';
 import Orders from './Components/orders';
 import CustomerProfile from './Components/UserProfile/CustomerProfile';
 import AddProduct from './Components/AdminComponent/Product/AddProduct';
+import Cart from './Components/CustomerComponent/cart';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -39,6 +40,7 @@ function App(){
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
         <Route path='/addproducts' element={<AddProduct/>}/>
+        <Route path='/cart' element={<Cart/>}/>
       </Routes>
 
     </div>

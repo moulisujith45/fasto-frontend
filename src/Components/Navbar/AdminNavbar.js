@@ -111,7 +111,7 @@ const AdminNavbar = () => {
                  <Link className="nav-link active" to="customerprofile">Profile</Link>
                </li>
                <li className="nav-iteam">
-                 <Link className="nav-link active" to="mycart">Cart</Link>
+                 <Link className="nav-link active" to="cart">Cart</Link>
                </li>
                </ul>
               </div>

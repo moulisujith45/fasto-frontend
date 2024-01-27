@@ -3,7 +3,6 @@ import { useEffect, useState} from "react"
 // import { useNavigate } from "react-router-dom"
 
 import { startEditProduct, startGetProduct, startRemoveProduct } from "../../../actions/productAction"
-import { addToCart } from "../../../actions/cartAction"
 const ProductList = (props) => {
 
     const [editId, setEditId] = useState(false)
@@ -45,9 +44,7 @@ const ProductList = (props) => {
         setEditId('')
     }
 
-    const handleAddToCart = (product) => {
-        dispatch(addToCart(product)) //dispatch the addToCart action
-    }
+    
 
 
     return(
@@ -65,7 +62,6 @@ const ProductList = (props) => {
                         <button onClick={() => {
                             handleEdit(ele._id)
                         }}>Edit</button>
-                        <button onClick={() => handleAddToCart(ele) }>Add to Cart</button> {/* cart handler */}
                     </div>
                         )
                 })}
