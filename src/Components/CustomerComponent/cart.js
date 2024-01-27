@@ -156,7 +156,7 @@ const Cart = (props) => {
 
     return(
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem'}}>
-            <h3>hi</h3>
+        
             {products.map((product) => (
                 <div key={product.id} className="card card-product" style={{maxWidth: '390px'}}>
                     <div className="card-body">

@@ -79,11 +79,10 @@
 // }
 
 // export default CategoryList
-
-import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { startEditCategory, startGetCategory, startRemoveCategory } from "../../../actions/categoryAction";
-import { ListGroup, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap';
 
 const CategoryList = (props) => {
   const [editId, setEditId] = useState(false);
@@ -114,14 +113,14 @@ const CategoryList = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name: name
+      name: name,
     };
     dispatch(startEditCategory(editId, formData));
     setEditId('');
   };
 
   return (
-    <div>
+    <Container>
       <ListGroup>
         {category.map((ele) => (
           <ListGroup.Item key={ele._id} className="d-flex justify-content-between align-items-center">
@@ -135,23 +134,28 @@ const CategoryList = (props) => {
       </ListGroup>
 
       {editId && (
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formCategoryName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Save
-          </Button>
-        </Form>
+        <form onSubmit={handleSubmit}>
+          <Row>
+            <Col xs={3}>
+              <label>Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                className="form-control"
+              />
+            </Col>
+            <Col>
+              <Button variant="primary" type="submit">
+                Save
+              </Button>
+            </Col>
+          </Row>
+        </form>
       )}
-    </div>
+    </Container>
   );
 };
 
