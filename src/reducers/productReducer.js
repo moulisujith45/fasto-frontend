@@ -6,7 +6,7 @@ const productReducer = (state = productInitialState, action) => {
             return [...state,action.payload]
         }
         case "GET_PRODUCT":{
-            return [...state,...action.payload]
+            return [...action.payload]
         }
         case "REMOVE_PRODUCT":{
             return state.filter(ele => ele._id !== action.payload)

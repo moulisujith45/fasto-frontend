@@ -1,16 +1,33 @@
 import axios from "../../config/axios";
-import { useState } from "react";
-import { useSelector } from "react-redux";//not Redux but context api
+import { useEffect, useState } from "react";
 
 
 const UserProfile = () => {
-    const user = useSelector((state) => state.user) || {};
+   const [user,setUser] = useState({})
     const [password, setPassword] = useState({
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
         errors: {}
     });
+
+    useEffect(() => {
+        //get user data from the server and update user data
+        const getUserData = async () => {
+            try{
+                const response = await axios.get('/api/user/getSingleProfile', {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                });
+                console.log("User data from server:", response.data)
+            }catch(error){
+                console.log(error)
+
+            }
+        }
+        getUserData()
+    },[])
 
     const runValidators = () => {
         const { currentPassword, newPassword, confirmPassword } = password;
@@ -68,7 +85,7 @@ const UserProfile = () => {
                 <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handleProfileSubmit}>
                     <div className="mb-3 col">
                         <label className="form-label">Username</label>
-                        <input type="text" className="form-control" placeholder={user.username} disabled required />
+                        <input type="text" className="form-control" value={user.username} disabled required />
                     </div>
                     <div className="mb-3 col">
                         <label className="form-label">Email</label>
