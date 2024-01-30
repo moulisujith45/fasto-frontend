@@ -14,6 +14,8 @@ import Orders from './Components/orders';
 import CustomerProfile from './Components/UserProfile/CustomerProfile';
 import AddProduct from './Components/AdminComponent/Product/AddProduct';
 import Cart from './Components/CustomerComponent/cart';
+import UserProfile from './Components/UserProfile/UserProfile';
+import UserSideBar from './Components/UserProfile/UserSideBar';
 
 function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
@@ -41,6 +43,8 @@ function App(){
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
         <Route path='/addproducts' element={<AddProduct/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/update-profile' element={<UserProfile/>}/>
+        <Route path='/usersidebar' element={<UserSideBar/>}/>
       </Routes>
 
     </div>
