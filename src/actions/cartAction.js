@@ -5,6 +5,31 @@ export const addToCart = (product) => ({
     payload: product
 })
 
+export const getUserCart = (product) => {
+    // console.log(product, "24342")
+    return {
+        type:'GET_USER_CART',
+        payload: product,
+    }
+}
+
+export const startGetUserCart = () => {
+    return async(dispatch) => {
+        try{
+            const response = await axios.get("/api/getUserCart",{
+                headers : {
+                    Authorization : localStorage.getItem('token')
+                }
+            })
+            dispatch(getUserCart(response.data))
+            // console.log(response.data,"nooo plz")
+            
+        }catch(e){
+            console.log(e)
+        }
+    }
+}
+
 export const startAddCart = (product) => {
     return async (dispatch) => {
         
@@ -14,8 +39,8 @@ export const startAddCart = (product) => {
                 Authorization : localStorage.getItem('token')
             }
           });
-          console.log(response.data)
-          dispatch(addToCart(product));
+          console.log(response.data, "123")
+        //   dispatch(addToCart(product));
         console.log(response.data)
         } catch (err) {
           console.log(err);

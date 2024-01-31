@@ -34,7 +34,7 @@ export const startGetProduct = () => {
         try{
             const response = await axios.get('/api/getAllProducts')
             dispatch(getProduct(response.data))
-            console.log(response.data)
+            console.log(response.data, "produ")
         } catch(e){
             console.log(e)
         }

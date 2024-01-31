@@ -10,6 +10,7 @@ import {startGetCategory} from "./actions/categoryAction"
 const store = configureStore()
 
 console.log(store.getState())
+
 if(localStorage.getItem('token')){
     store.dispatch(startGetCategory())
 }
