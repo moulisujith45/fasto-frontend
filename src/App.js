@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Routes,Route,Link } from "react-router-dom"
 import {ToastContainer, toast} from 'react-toastify'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Home from "./Components/Home"
 import Dasbord from "./Components/Dasbord"
 import Register from "./Components/Register"
@@ -16,9 +16,17 @@ import AddProduct from './Components/AdminComponent/Product/AddProduct';
 import Cart from './Components/CustomerComponent/cart';
 import UserProfile from './Components/UserProfile/UserProfile';
 import UserSideBar from './Components/UserProfile/UserSideBar';
+import { useDispatch, useSelector } from "react-redux";
+import { startGetProduct } from './actions/productAction';
 
 function App(){
+  const dispatch = useDispatch();
+
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    dispatch(startGetProduct());
+}, [dispatch])
 
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)

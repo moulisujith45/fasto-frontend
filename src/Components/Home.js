@@ -6,9 +6,8 @@ export default function Home() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart)
-    useEffect(() => {
-        dispatch(startGetProduct());
-    }, [dispatch]);
+    
+
     const addToCart = (product) => {
         let transformedProduct = {
             productId: product._id,
@@ -25,7 +24,7 @@ export default function Home() {
     return (
         <div>
             {products.map((product) => (
-                <div key={product} className="card card-product" style={{ maxWidth: '390px' }}>
+                <div key={product._id} className="card card-product" style={{ maxWidth: '390px' }}>
                     <div className="card-body">
                         <div className="text-center position-relative">
                             <img src={`http://localhost:3040/images/${product.image}`} alt={product.name} className="mb-3 img-fluid" />
