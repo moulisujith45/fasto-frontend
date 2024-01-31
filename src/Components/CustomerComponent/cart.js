@@ -86,6 +86,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { StartRemoveCart , startAddCart,startGetUserCart } from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
+import { Navigate } from "react-router-dom";
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.data)
@@ -106,9 +107,16 @@ const Cart = () => {
         dispatch(startGetProduct())
     }, [dispatch])
 
+    const handleProceed = () => {
+        Navigate('')
+    }
+
     return(
         <div className="cart-container">
             <div className="cart-items">
+                <div>
+                <button type="button" class="btn btn-outline-primary" onClick={handleProceed}>Proceed</button>
+                </div>
                 {cart[0]?.products.map((item) => {
                     const product = products.find((product) => product._id === item.productId)
                     if(!product){
