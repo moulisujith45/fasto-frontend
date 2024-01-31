@@ -41,7 +41,7 @@ export default function AddProduct(){
         }
     }
 
-    console.log(image)
+    // console.log(image)
 
     const handleSubmit = (e) => {
         e.preventDefault()
