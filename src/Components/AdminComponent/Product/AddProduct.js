@@ -25,7 +25,7 @@ export default function AddProduct(){
 
     function runValidation(){
         if(name.trim().length === 0){
-            errors.name = ' name is required'
+            errors.name = ' product name is required'
         }
         if(description.trim().length === 0){
             errors.description = 'description is required'
@@ -72,7 +72,7 @@ export default function AddProduct(){
                     id="name"
                     onChange={(e) =>{setName(e.target.value)}}
                 />
-                {formErrors.productName && formErrors.productName}<br />
+                {formErrors.name && formErrors.name}<br />
 
                 <label>Description</label>
                 <input 
