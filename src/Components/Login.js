@@ -43,7 +43,7 @@ export default function Login(props){
                     if(role === 'Admin') navigate('/admin')
                     if(role === "customer") navigate('/')
                     if(role === "DeliveryMan") navigate('/admin')
-                },2000)
+                },1000)
                 snackbarRef.current.show("Login Successful!", "success");
             } catch(e) {
                 setServerErrors(e.response.data.errors)

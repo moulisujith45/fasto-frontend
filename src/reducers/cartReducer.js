@@ -9,8 +9,10 @@ const cartReducer = (state = cartInitialState,action) => {
         //     return [...state,action.payload]
         // }
         case "GET_USER_CART" :{
-            // console.log(action.payload,"reducer")
             return {...state, data: action.payload}
+        }
+        case "REMOVE_CART" : {
+            return {...state, data: state.data.filter(ele => ele._id !== action.payload)}
         }
         default :{
             return {...state}
@@ -18,3 +20,4 @@ const cartReducer = (state = cartInitialState,action) => {
     }
 }
 export default cartReducer
+
