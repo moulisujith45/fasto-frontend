@@ -1,11 +1,15 @@
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useState, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../config/axios'
-import './login.css'
+import "../Components/Styling/login.css"
+import Snackbar from './Styling/Snackbar';
+import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { jwtDecode } from "jwt-decode"
+
+
 const loginValidationSchema = yup.object({
     email : yup.string().email().required("email is required"),
     password : yup.string().required("password is required").min(8).max(128)
@@ -16,7 +20,7 @@ export default function Login(props){
     const navigate = useNavigate()
     // const { handleLogin, loginToast } = props
     const [serverErrors, setServerErrors] = useState('')
-
+    const snackbarRef = useRef(null);
 
     const formik = useFormik({
         initialValues : {
@@ -35,14 +39,15 @@ export default function Login(props){
                 localStorage.setItem('token', response.data.token )
                 const {role} = jwtDecode(localStorage.getItem("token"))
                 
-                if(role === 'Admin') navigate('/admin')
-                if(role === "customer") navigate('/')
-                if(role === "DeliveryMan") navigate('/admin')
-                
-               
-                // navigate('/')
+                setTimeout(() => {
+                    if(role === 'Admin') navigate('/admin')
+                    if(role === "customer") navigate('/')
+                    if(role === "DeliveryMan") navigate('/admin')
+                },2000)
+                snackbarRef.current.show("Login Successful!", "success");
             } catch(e) {
                 setServerErrors(e.response.data.errors)
+                snackbarRef.current.show("Login Failed. Check your credentials and try again.", "fail");
                 console.log(e)
                 
             }
@@ -51,47 +56,79 @@ export default function Login(props){
 
     
     return(
-        <div className="wrapper d-flex bg-light align-items-center justify-content-center w-100" >
-            <div className='login rounded' >
-                <h2 className='mb-3' >Login</h2>
-                <form className='form-validation' onSubmit={formik.handleSubmit} >
-                    <div className='form-group mb-2' >
-                        <label className='form-group mb-2'>Email</label><br />
-                        <input 
-                        type='text'
-                        value={formik.values.email}
-                        name = "email"
-                        onChange={formik.handleChange}
-                        /> <br />
+       
 
-                        <div className='invalid-feedback' >
-                            {formik.errors.email}
-                        </div>
+        <div>
+<Row className='maxi'>
+  <Col md={6}>
+    <div>
+      <h1 style={{ marginLeft: '60px', marginTop: '15px' }}>Login</h1>
+      <Form onSubmit={formik.handleSubmit} style={{ marginLeft: '60px', marginTop: '20px' }}>
 
-                        <br />
-                    </div>
+        <FormGroup>
+          <strong for='email' className="form-label">Email:</strong>
+          <Input
+            style={{width:"500px"}}
+            type='text'
+            id='email'
+            name='email'
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            className={`form-control ${formik.errors.email ? 'is-invalid' : ''}`}
+          />
+          <div className='invalid-feedback'>{formik.errors.email}</div>
+        </FormGroup>
 
-                    <div className='form-group mb-2' >
-                        <label htmlFor='password' className='form-label' >Password</label><br />
-                        <input 
-                        type='password'
-                        
-                        value={formik.values.password}
-                        name='password'
-                        onChange={formik.handleChange}
-                        />
 
-                        <div className='invalid-feedback' >
-                            {formik.errors.password}
-                        </div>
-                    </div>
+        <FormGroup>
+          <strong for='password'>Password:</strong>
+          <Input
+            style={{width:"500px"}}
+            type='password'
+            id='password'
+            name='password'
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            className={formik.errors.password ? 'is-invalid' : ''}
+          />
+          <div className='invalid-feedback'>{formik.errors.password}</div>
+        </FormGroup>
+        <div>
 
-                    <button type="submit" className='btn btn-success block mt-2' value={'login'}>
-                        Login
-                    </button>
-                </form>
-            </div>
         </div>
+
+        <div>  
+          <button type='submit' className='btn btn-dark'>
+            Login
+          </button>
+          <br/>
+          <br/>
+          <div>
+            Not yet Registered ?<Link to='/register'>Register</Link>
+          </div>
+        </div>
+      </Form>
+    </div>
+  </Col>
+  <Col md={6}>
+    <div>
+      <img
+        className='image'
+        src='https://img.freepik.com/free-vector/flat-people-order-food-online-grocery-shopping-from-mobile-application-internet-purchases-with-home-delivery-from-supermarket-store-smartphone-screen-with-buy-button-basket-full-products_88138-856.jpg?w=1060&t=st=1706859092~exp=1706859692~hmac=ff9bfee1392ff3a9cc927e827d96a72a6973ce3980da3541370020176a788866'
+        alt='Login Image'
+        style={{ objectFit:'cover', width: '700px', height: '585px' }}
+      />
+    </div>
+    <div className="image-background">
+      <img
+        src='https://img.freepik.com/free-vector/abstract-background-design-with-stars-blue_53876-59272.jpg?size=626&ext=jpg&ga=GA1.1.1368920519.1706858389&semt=ais'
+        alt='Login Image'
+        style={{ objectFit: 'cover', maxWidth: '110%', width: '102%', height: '585px' }}
+      />
+    </div>
+  </Col>
+</Row>
+  <Snackbar ref={snackbarRef} />
+</div>
     )
 }
-
