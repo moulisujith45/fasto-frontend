@@ -241,6 +241,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart.data); 
+    console.log(cart)
     const [addedProducts, setAddedProducts] = useState({}); // State to track added products and their quantities
 
     useEffect(() => {
@@ -257,13 +258,14 @@ export default function Home() {
 
     const addToCart = (product) => {
         const productId = product._id;
-        const cartProducts = cart?.products; 
-        // Check if cartProducts is defined and if productId exists in cartProducts
-        const isProductInCart = cartProducts?.some(item => item.productId === productId); // Use optional chaining here too
+        const cartProducts = cart; 
+        // console.log(cart,"see")
+        const isProductInCart = cartProducts?.some(item => item.productId === productId); 
         if (isProductInCart) {
-            // If product already in cart, increment its quantity
+            console.log('home working')
             incrementQuantity(productId);
         } else {
+            console.log("Home notworking")
             dispatch(startAddCart({ productId, quantity: 1, price: product.price }));
         }
         toast.success(' item added to cart!', {
@@ -277,6 +279,10 @@ export default function Home() {
             theme: "colored",
         });
     };
+
+    const itemInCart = (product) => {
+        return !!cart.find(ele => ele.productId == product._id ) 
+    }
 
     return (
         <div>
@@ -293,15 +299,13 @@ export default function Home() {
                             <div>
                                 <span className="text-dark">${product.price}</span>
                             </div>
-                            {addedProducts[product._id] ? (
-                                <div>
-                                    <button onClick={() => incrementQuantity(product._id)}>+1</button>
-                                    <span>{addedProducts[product._id]}</span>
-                                    <button onClick={() => decrementQuantity(product._id)}>-1</button>
-                                </div>
-                            ) : (
-                                <button onClick={() => addToCart(product)}>Add to Cart</button>
-                            )}
+
+                            { 
+                                itemInCart(product) ? <button> + 1 </button> :  <button onClick={() => addToCart(product)}>Add to Cart</button>
+                            }
+
+
+                               
                         </div>
                     </div>
                 </div>

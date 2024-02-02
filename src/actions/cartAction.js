@@ -50,7 +50,7 @@ export const startAddCart = (product) => {
 export const incQuantity = (id) => {
     return{
         type:"INC_QUANTITY",
-        payload:id
+        payload: id
     }
 }
 
@@ -65,8 +65,8 @@ export const StartIncQuantity = (id) => {
                     Authorization : localStorage.getItem('token')
                 }
             })
-            console.log(response.data.products[0].productId,'incput')
-            dispatch(incQuantity(response.data.products[0].productId))
+            console.log(response.data.productId,'incput')
+            dispatch(incQuantity(response.data.productId))
         }catch(err){
             console.log(err)
         }
@@ -91,8 +91,8 @@ export const StartDecQuantity = (id) => {
                     Authorization : localStorage.getItem('token')
                 }
             })
-            console.log(response.data,'decput')
-            dispatch(decQuantity(id))
+            console.log(response.data.productId,'decput')
+            dispatch(decQuantity(response.data.productId))
         }catch(err){
             console.log(err)
         }

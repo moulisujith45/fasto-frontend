@@ -13,27 +13,16 @@ const cartReducer = (state = cartInitialState,action) => {
         }
         case "INC_QUANTITY" :{
             return {...state, data: state.data.map((ele)=>{
-                if(ele._id === action.payload){
+                if(ele.productId === action.payload){
                     return {...ele, quantity: ele.quantity + 1}
                 }else{
                     return {...ele}
                 }
-            })}
+            })}   
         }
-        // case "INC_QUANTITY":
-        //     return {
-        //         ...state,
-        //         data: state.data.map(ele => {
-        //             if (ele._id === action.payload) {
-        //                 return { ...ele, quantity: ele.quantity + 1 };
-        //             } else {
-        //                 return { ...ele };
-        //             }
-        //         })
-        //     };
         case "DEC_QUANTITY":{
             return {...state,data:state.data.map((ele) => {
-                if(ele._id === action.payload){
+                if(ele.productId === action.payload){
                     return {...ele, quantity: ele.quantity - 1}
                 }else{
                     return {...ele}
