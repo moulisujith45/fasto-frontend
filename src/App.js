@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { startGetProduct } from './actions/productAction';
 import AddAddress from './Components/Location/AddAddress';
 import DisplayAddress from './Components/Location/DisplayAddress';
+import {startGetCategory} from "./actions/categoryAction"
+import { startGetUserCart } from './actions/cartAction';
 
 function App(){
   const dispatch = useDispatch();
@@ -27,8 +29,16 @@ function App(){
   const[isLoggedIn,SetIsLoggedIn] = useState(false)
 
   useEffect(() => {
-    dispatch(startGetProduct());
+    dispatch(startGetCategory())
+  },[dispatch])
+
+  useEffect(() => {
+    dispatch(startGetUserCart());
 }, [dispatch])
+
+useEffect(() => {
+  dispatch(startGetProduct());
+}, [dispatch]);
 
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)
@@ -59,6 +69,7 @@ function App(){
       </Routes>
 
     </div>
+    <ToastContainer/>
     </BrowserRouter>
  
   )

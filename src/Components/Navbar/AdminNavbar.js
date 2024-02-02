@@ -2,13 +2,23 @@ import { jwtDecode } from 'jwt-decode';
 import {useState,useEffect} from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import fastologo from '../images/fastologo.jpg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Modal, Button } from 'react-bootstrap'
+import { useSelector } from 'react-redux';
 const AdminNavbar = () => {
+  const cartItems = useSelector(state => state.cart)
+  console.log(cartItems,'cartItems')
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const initialRole = token ? jwtDecode(token).role : "";
     const [role, setRole] = useState(initialRole);
     const [isLoggedIn,SetIsLoggedIn] = useState(false)
-  
+  // for logout
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
     useEffect(() => {
       
       
@@ -36,9 +46,10 @@ const AdminNavbar = () => {
     setRole("")
     SetIsLoggedIn(false)
     localStorage.removeItem("token")
-    alert("logout successfully")
+    
     navigate('/')
     // Handle logout logic
+   
   };
   console.log("role1",role)
   return (
@@ -111,7 +122,7 @@ const AdminNavbar = () => {
                  <Link className="nav-link active" to="customerprofile">Profile</Link>
                </li>
                <li className="nav-iteam">
-                 <Link className="nav-link active" to="cart">Cart</Link>
+               <Link className="nav-link active" to="cart">Cart <small>({cartItems.data.length})</small></Link>
                </li>
                </ul>
               </div>
@@ -124,6 +135,7 @@ const AdminNavbar = () => {
            </li>
            </ul>
          </div>
+        
            : null}
       </div>
     </nav>

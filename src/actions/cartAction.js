@@ -13,6 +13,7 @@ export const getUserCart = (product) => {
     }
 }
 
+
 export const startGetUserCart = () => {
     return async(dispatch) => {
         try{
@@ -22,7 +23,6 @@ export const startGetUserCart = () => {
                 }
             })
             dispatch(getUserCart(response.data))
-            // console.log(response.data,"nooo plz")
             
         }catch(e){
             console.log(e)
@@ -31,6 +31,7 @@ export const startGetUserCart = () => {
 }
 
 export const startAddCart = (product) => {
+    console.log(product,"startAddcart")
     return async (dispatch) => {
         
         try {
@@ -39,13 +40,63 @@ export const startAddCart = (product) => {
                 Authorization : localStorage.getItem('token')
             }
           });
-          console.log(response.data, "123")
-        //   dispatch(addToCart(product));
-        console.log(response.data)
+          console.log(response.data.products, "456")
+          dispatch(addToCart(product))
         } catch (err) {
-          console.log(err);
+          console.log(err)
         }
       };
+}
+export const incQuantity = (id) => {
+    return{
+        type:"INC_QUANTITY",
+        payload:id
+    }
+}
+
+export const StartIncQuantity = (id) => {
+    return async (dispatch) => {
+        if(!id){
+          return  console.log('missing product id')
+        }
+        try{
+            const response= await axios.put(`/api/user/inccart/${id}`,id,{
+                headers : {
+                    Authorization : localStorage.getItem('token')
+                }
+            })
+            console.log(response.data.products[0].productId,'incput')
+            dispatch(incQuantity(response.data.products[0].productId))
+        }catch(err){
+            console.log(err)
+        }
+    }
+}
+export const decQuantity = (id) => {
+    console.log(id,"dec")
+    return{
+        type:"DEC_QUANTITY",
+        payload:id
+    }
+}
+
+export const StartDecQuantity = (id) => {
+    return async (dispatch) => {
+        if(!id){
+          return  console.log('missing product id')
+        }
+        try{
+            const response = await axios.put(`/api/user/deccart/${id}`,id,{
+                headers : {
+                    Authorization : localStorage.getItem('token')
+                }
+            })
+            console.log(response.data,'decput')
+            dispatch(decQuantity(id))
+        }catch(err){
+            console.log(err)
+        }
+    }
 }
 
 const removeCart = (id) => {
@@ -54,6 +105,7 @@ const removeCart = (id) => {
         payload:id
     }
 }
+
 
 export const StartRemoveCart = (id) => {
     return async(dispatch) => {
