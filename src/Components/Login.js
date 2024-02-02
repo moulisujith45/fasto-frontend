@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../config/axios'
@@ -14,14 +15,17 @@ const loginValidationSchema = yup.object({
 export default function Login(props){
     const navigate = useNavigate()
     // const { handleLogin, loginToast } = props
+    const [serverErrors, setServerErrors] = useState('')
+
 
     const formik = useFormik({
         initialValues : {
             email : '',
             password : ''
         },
-        validationSchema: loginValidationSchema,
         validateOnChange: false,
+        validationSchema: loginValidationSchema,
+        
         onSubmit: async (values) => {
             try {
                 const formData = {email: values.email, password: values.password}
@@ -38,6 +42,7 @@ export default function Login(props){
                
                 // navigate('/')
             } catch(e) {
+                setServerErrors(e.response.data.errors)
                 console.log(e)
                 
             }

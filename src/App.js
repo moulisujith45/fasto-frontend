@@ -18,6 +18,8 @@ import UserProfile from './Components/UserProfile/UserProfile';
 import UserSideBar from './Components/UserProfile/UserSideBar';
 import { useDispatch, useSelector } from "react-redux";
 import { startGetProduct } from './actions/productAction';
+import AddAddress from './Components/Location/AddAddress';
+import DisplayAddress from './Components/Location/DisplayAddress';
 
 function App(){
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ function App(){
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/update-profile' element={<UserProfile/>}/>
         <Route path='/usersidebar' element={<UserSideBar/>}/>
+        <Route path='/display-address' element={<DisplayAddress/>}/>
       </Routes>
 
     </div>

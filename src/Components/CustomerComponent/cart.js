@@ -86,9 +86,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { StartRemoveCart , startAddCart,startGetUserCart } from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
-import { Navigate } from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
 
 const Cart = () => {
+    const navigate = useNavigate()
     const cart = useSelector((state) => state.cart.data)
     const products = useSelector((state) => state.product)
     const [cartItems,setCartItems] = useState([])
@@ -108,7 +109,7 @@ const Cart = () => {
     }, [dispatch])
 
     const handleProceed = () => {
-        Navigate('')
+       navigate('/display-address')
     }
 
     return(
