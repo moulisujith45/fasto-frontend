@@ -7,20 +7,23 @@ import configureStore from './store/configureStore';
 // import reportWebVitals from './reportWebVitals';
 import {startGetCategory} from "./actions/categoryAction"
 
+
 const store = configureStore()
 
 console.log(store.getState())
 
-if(localStorage.getItem('token')){
-    store.dispatch(startGetCategory())
-}
-
+// if(localStorage.getItem('token')){
+//     store.dispatch(startGetCategory())
+// }
+// useEffect(() => {
+//     dispatch(startGetProduct());
+//   }, [dispatch])
 store.subscribe(() => {
     console.log(store.getState(), "updated State")
 })
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store}>
+    <Provider store={store} >
          <App />
     </Provider>
 );
