@@ -136,16 +136,17 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { startGetUserCart ,startAddCart, StartRemoveCart} from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
-import {useNavigate} from 'react-router-dom'
+
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.data)
     const products = useSelector((state) => state.product)
     const [cartItems,setCartItems] = useState([])
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const removeCart = (productId) => {
         dispatch(StartRemoveCart(productId))
@@ -155,14 +156,16 @@ const Cart = () => {
         dispatch(startAddCart(productId))
     }
 
+    const handleProceed = () => {
+        navigate('/display-address')
+    }
+
     useEffect(() => {
         dispatch(startGetUserCart());
         dispatch(startGetProduct());
     }, [dispatch]);
 
-    const handleProceed = () => {
-        Navigate('')
-    }
+  
 
     return (
         <div className="cart-container">
