@@ -139,24 +139,30 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { startGetUserCart } from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
+import {useNavigate} from 'react-router-dom'
 
 const Cart = () => {
-    const cart = useSelector((state) => state.cart.data);
-    const products = useSelector((state) => state.product);
-    console.log(products, 'products12');
-    const [cartItems, setCartItems] = useState([]);
-    const dispatch = useDispatch();
-    
+    const cart = useSelector((state) => state.cart.data)
+    const products = useSelector((state) => state.product)
+    const [cartItems,setCartItems] = useState([])
+    const dispatch = useDispatch()
+
+    const removeCart = (productId) => {
+        dispatch(StartRemoveCart(productId))
+    }
+
+    const addToCart = (productId) => {
+        dispatch(startAddCart(productId))
+    }
+
     useEffect(() => {
         dispatch(startGetUserCart());
         dispatch(startGetProduct());
     }, [dispatch]);
 
     const handleProceed = () => {
-        Navigate(''); // This line should be replaced with the navigation logic you intend to use
-    };
-
-    console.log(cart);
+        Navigate('')
+    }
 
     return (
         <div className="cart-container">
