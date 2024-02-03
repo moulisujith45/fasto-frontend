@@ -55,8 +55,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { startGetUserCart ,startAddCart, StartRemoveCart} from "../../actions/cartAction";
+import { startGetUserCart ,startAddCart, StartRemoveCart, StartIncQuantity, StartDecQuantity} from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
 import {useNavigate} from 'react-router-dom'
 
@@ -84,9 +83,13 @@ const Cart = () => {
         dispatch(startGetProduct());
     }, [dispatch]);
 
-    const handleProceed = () => {
-        Navigate('')
+    const  incrementQuantity = (productId) =>{
+        dispatch(StartIncQuantity(productId))
     }
+    const decrementQuantity = (productId) => {
+        dispatch(StartDecQuantity(productId))
+    }
+    
 
     return (
         <div className="cart-container">
@@ -105,9 +108,9 @@ const Cart = () => {
                             <div className="item-details">
                                 <h3>{product.name}</h3>
                                 <p>${product.price}</p>
-                                <button onClick={() => incrementQuantity(product._id)}>+1</button>
+                                <button onClick={() => incrementQuantity(item.productId)}>+1</button>
                                 <p>Quantity: {item.quantity}</p>
-                                <button onClick={() => decrementQuantity(product._id)}>-1</button>
+                                <button onClick={() => decrementQuantity(item.productId)}>-1</button>
 
                             </div>
                         </div>
