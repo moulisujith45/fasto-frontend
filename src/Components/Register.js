@@ -12,7 +12,7 @@ export default function Register({registerToast}){
   const[username,setUsername] = useState("")
   const[email,setEmail] = useState("")
   const[password,setPassword] = useState("")
-  const[formErrors,setFormErrors] = useState({})
+  const[formErrors,setFormErrors] = useState([])
   const[mobile,setMobile] = useState('')
   const[role,setRole] = useState("")
 
@@ -124,6 +124,7 @@ export default function Register({registerToast}){
               }}
               className='form-control' />
             </div>
+            {formErrors.password && <span>{formErrors.password}</span>} <br/>
             <br/>
             {role === "Admin" && 
             <div className='form-group'>

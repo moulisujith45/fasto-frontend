@@ -58,8 +58,15 @@ export default function AddProduct(){
             formdata.append('image',image)
 
             dispatch(startAddProduct(formdata))
-        } else {
+        
             setFormErrors(errors)
+            setName('')
+            setDescription('')
+            setPrice('')
+            setStock('')
+            setMinStock('')
+            setCategory('')
+            setImage('')
         }
     }
     return(
