@@ -124,7 +124,6 @@ export default function Register({registerToast}){
               }}
               className='form-control' />
             </div>
-            {formErrors.password && <span>{formErrors.password}</span>} <br/>
             <br/>
             {role === "Admin" && 
             <div className='form-group'>
