@@ -30,12 +30,21 @@ export default function AddAddress() {
     });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if(Object.keys(addressDetails).length >= 0){
+  //     dispatch(startEditAddress(addressDetails._id,addressData))
+  //   } else {
+  //   dispatch(startAddAddress(addressData));
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(Object.keys(addressDetails).length >= 0){
-      dispatch(startEditAddress(addressDetails._id,addressData))
+    if (addressDetails._id) {
+      dispatch(startEditAddress(addressDetails._id, addressData));
     } else {
-    dispatch(startAddAddress(addressData));
+      dispatch(startAddAddress(addressData));
     }
   };
 
