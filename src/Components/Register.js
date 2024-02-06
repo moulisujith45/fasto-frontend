@@ -29,10 +29,16 @@ export default function Register({registerToast}){
       errors.email = "email is required"
     }else if(!isEmail(email)){
       errors.email = "invalid email format"
-    }else if(password.trim().length<8 || password.trim().length>128){
-      errors.password = "password should be between 8-128 characters"
     }
-    setFormErrors(errors)
+    if(password.trim().length === 0){
+      errors.password = "password is required"
+    } else if(password.trim().length < 8 || password.trim().length > 128){
+      errors.password = "passeword should be betweeen 8 - 128  characters"
+    }
+    if (mobile.trim().length === 0) {
+      errors.mobile = "Mobile number is required";
+    } 
+      setFormErrors(errors)
   }
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -124,6 +130,7 @@ export default function Register({registerToast}){
               }}
               className='form-control' />
             </div>
+            {formErrors.password && <span>{formErrors.password}</span>}
             <br/>
             {role === "Admin" && 
             <div className='form-group'>
@@ -131,9 +138,10 @@ export default function Register({registerToast}){
               <input type="number" value={mobile} id='number'
                onChange={(e)=>setMobile(e.target.value)}
                className='form-control'/>
+               {formErrors.mobile && <span>{formErrors.mobile}</span>} <br/>
             </div>
             }
-            {formErrors.password && <span>{formErrors.password}</span>} <br/>
+            
             <input type="submit" value="register" />
           </form>
         </div>
