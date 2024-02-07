@@ -22,6 +22,8 @@ import AddAddress from './Components/Location/AddAddress';
 import DisplayAddress from './Components/Location/DisplayAddress';
 import {startGetCategory} from "./actions/categoryAction"
 import { startGetUserCart } from './actions/cartAction';
+import ForgotPassword from './Components/UserProfile/ForgotPassword';
+import ResetPassword from './Components/UserProfile/ResetPassword';
 
 function App(){
   const dispatch = useDispatch();
@@ -66,6 +68,8 @@ useEffect(() => {
         <Route path='/update-profile' element={<UserProfile/>}/>
         <Route path='/usersidebar' element={<UserSideBar/>}/>
         <Route path='/display-address' element={<DisplayAddress/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path="/resetPassword/:id/:token" element={<ResetPassword/>}/>
       </Routes>
 
     </div>

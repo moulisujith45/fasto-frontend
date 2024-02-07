@@ -104,7 +104,7 @@ export default function Login(props){
           <br/>
           <br/>
           <div>
-            Not yet Registered ?<Link to='/register'>Register</Link>
+            Not yet Registered ?<Link to='/register'>Register</Link><br/><Link to="/forgot-password" style={{textAlign:"center"}}>forgot-password ?</Link>
           </div>
         </div>
       </Form>
