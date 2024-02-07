@@ -51,7 +51,6 @@ useEffect(() => {
     <BrowserRouter>
       <div className='app'>
        <AdminNavbar/>
-      {/*routes*/}
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/dashboard" element={<Dasbord/>} />
