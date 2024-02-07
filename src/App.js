@@ -22,6 +22,8 @@ import AddAddress from './Components/Location/AddAddress';
 import DisplayAddress from './Components/Location/DisplayAddress';
 import {startGetCategory} from "./actions/categoryAction"
 import { startGetUserCart } from './actions/cartAction';
+import ForgotPassword from './Components/UserProfile/ForgotPassword';
+import ResetPassword from './Components/UserProfile/ResetPassword';
 import { startGetAddress } from './actions/addressAction';
 function App(){
   const dispatch = useDispatch();
@@ -61,7 +63,6 @@ useEffect(() => {
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
         <Route path='/addcategories' element={<AddCategory/>}/>
-        {/* <Route path='/addcategories' element={<Category/>}/> */}
         <Route path='/mycart' element={<MyCart/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
@@ -70,7 +71,6 @@ useEffect(() => {
         <Route path='/update-profile' element={<UserProfile/>}/>
         <Route path='/usersidebar' element={<UserSideBar/>}/>
         <Route path='/display-address' element={<DisplayAddress/>}/>
-      
       </Routes>
 
     </div>
