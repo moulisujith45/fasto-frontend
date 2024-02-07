@@ -78,4 +78,3 @@ useEffect(() => {
 }
 
 export default App
-
