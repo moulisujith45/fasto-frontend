@@ -24,7 +24,7 @@ import {startGetCategory} from "./actions/categoryAction"
 import { startGetUserCart } from './actions/cartAction';
 import ForgotPassword from './Components/UserProfile/ForgotPassword';
 import ResetPassword from './Components/UserProfile/ResetPassword';
-import { startGetAddress } from './actions/addressAction';
+
 function App(){
   const dispatch = useDispatch();
 
@@ -41,10 +41,6 @@ function App(){
 useEffect(() => {
   dispatch(startGetProduct());
 }, [dispatch]);
-
-useEffect(() => {
-  dispatch(startGetAddress())
-},[dispatch])
 
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)
@@ -71,6 +67,8 @@ useEffect(() => {
         <Route path='/update-profile' element={<UserProfile/>}/>
         <Route path='/usersidebar' element={<UserSideBar/>}/>
         <Route path='/display-address' element={<DisplayAddress/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path="/resetPassword/:id/:token" element={<ResetPassword/>}/>
       </Routes>
 
     </div>
