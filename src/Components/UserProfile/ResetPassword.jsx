@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// import axios from "../Api_Resources/axios";
 import axios from '../../config/axios';
+import { ToastContainer, toast } from 'react-toastify'
+
 
 function ResetPassword() {
   const { id, token } = useParams();
@@ -36,7 +37,8 @@ function ResetPassword() {
        
 
         if (response.data.msg === "Successfully changed the password") {
-          alert('Password changed successfully');
+        //   alert('Password changed successfully');
+          toast.info('Password changed successfully')
           navigate('/login');
         }
       } catch (e) {
@@ -93,6 +95,7 @@ function ResetPassword() {
           </button>
         </div>
       </form>
+      <ToastContainer/>
     </div>
   );
 }

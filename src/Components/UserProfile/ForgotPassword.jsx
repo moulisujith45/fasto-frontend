@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
-// const isEmail = require('validator/lib/isEmail')
 import axios from '../../config/axios';
+import { ToastContainer, toast } from 'react-toastify'
 
 
 function ForgotPassword() {
@@ -34,10 +34,16 @@ function ForgotPassword() {
         const formData = _.pick(user, 'email');
         const response = await axios.post('/api/user/forgot-password', formData);
 
-        if (response.data.status === 'Email sent successfully') {
-          navigate('/login');
+        if (response.data.status === 'success') {
+        //    alert('Email sent Successfully')
+             toast.info(response.data.msg)
+             setTimeout(() => {
+                navigate('/login');
+             },1000)
+          
         }
       } catch (e) {
+        toast.error("Something went Wrong !!!")
         setUser({ ...user, formErrors: {}, serverErrors: e.response.data.errors });
       }
     }
@@ -90,6 +96,7 @@ function ForgotPassword() {
           </button>
         </div>
       </form>
+      <ToastContainer/>
     </div>
   );
 }
