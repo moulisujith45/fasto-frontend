@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import AddAddress from "./AddAddress";
 import { startGetAddress } from "../../actions/addressAction";
 import { Card, Button } from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 export default function DisplayAddress() {
   const addressDetails = useSelector((state) => {
     return state.address; // Assuming addresses is an array inside the address object
   });
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [toggleAddAddress, setToggleAddAddress] = useState(false);
   const [toggleEditAddress, setToogleEditAddress] = useState(false)
@@ -19,7 +20,9 @@ export default function DisplayAddress() {
   }, []); // Use an empty dependency array to fetch addresses only on mount
 
   console.log(addressDetails, "i am address");
-
+  const handleProceed = () => {
+    navigate('/orders')
+  }
   // Check if addressDetails is an array
   // const isAddressArray = Array.isArray(addressDetails);
  
@@ -51,6 +54,9 @@ export default function DisplayAddress() {
           <Button onClick={() => setToogleEditAddress(true)}>
             Edit
           </Button>
+          <div>
+      <button type="button" className="btn btn-outline-primary" onClick={handleProceed}>Proceed</button>
+      </div>
         </div>
       ) : (
         toggleAddAddress && <AddAddress />

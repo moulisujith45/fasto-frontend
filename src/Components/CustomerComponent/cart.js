@@ -31,10 +31,15 @@ const Cart = () => {
     const  incrementQuantity = (productId) =>{
         dispatch(StartIncQuantity(productId))
     }
+    // const decrementQuantity = (productId) => {
+    //     dispatch(StartDecQuantity(productId))
+    // }
     const decrementQuantity = (productId) => {
-        dispatch(StartDecQuantity(productId))
+        const item = cart.find(item => item.productId === productId);
+        if (item && item.quantity > 1) {
+            dispatch(StartDecQuantity(productId));
+        }
     }
-    
 
     return (
         <div className="cart-container">

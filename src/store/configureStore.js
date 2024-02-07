@@ -4,13 +4,14 @@ import categoryReducer from '../reducers/categoryReducer'
 import productReducer from '../reducers/productReducer'
 import cartReducer from '../reducers/cartReducer'
 import addressReducer from '../reducers/addressReducer'
-
+import orderReducer from '../reducers/orderReducer'
 const configureStore = () => {
     const store = createStore(combineReducers({
         category: categoryReducer,
         product: productReducer,
         cart :cartReducer,
-        address: addressReducer
+        address: addressReducer,
+        order : orderReducer
     }), applyMiddleware(thunk))
     return store
 }

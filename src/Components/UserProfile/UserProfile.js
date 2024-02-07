@@ -1,8 +1,9 @@
 import axios from "../../config/axios";
 import { useEffect, useState } from "react";
-
+import { Tab, Tabs, Card, Button, Form } from "react-bootstrap";
 
 const UserProfile = () => {
+    const [key, setKey] = useState("account");
    const [user,setUser] = useState({})
     const [password, setPassword] = useState({
         currentPassword: "",
@@ -79,7 +80,55 @@ const UserProfile = () => {
     };
 
     return (
-        <div className="pe-lg-14">
+    //     <div className="pe-lg-14"  style={{width:"500px" ,marginLeft:"400px"}}> {/* Wrapping the Tabs component in the desired style */}
+    //   <Tabs
+    //     id="controlled-tab-example"
+    //     activeKey={key}
+    //     onSelect={(k) => setKey(k)}
+    //     className="mb-3"
+    //   >
+    //     <Tab eventKey="account" title="Account">
+    //       <Card>
+    //         <Card.Header>Account</Card.Header>
+    //         <Card.Body>
+    //           <Form>
+    //             <Form.Group className="mb-3">
+    //               <Form.Label>Name</Form.Label>
+    //               <Form.Control type="text"  />
+    //             </Form.Group>
+    //             <Form.Group className="mb-3">
+    //               <Form.Label>Username</Form.Label>
+    //               <Form.Control type="text"  />
+    //             </Form.Group>
+    //           </Form>
+    //         </Card.Body>
+    //       </Card>
+    //     </Tab>
+    //     <Tab eventKey="password" title="Password">
+    //       <Card>
+    //         <Card.Header>Password</Card.Header>
+    //         <Card.Body>
+    //           <Form>
+    //             <Form.Group className="mb-3">
+    //               <Form.Label>Current password</Form.Label>
+    //               <Form.Control type="password" />
+    //             </Form.Group>
+    //             <Form.Group className="mb-3">
+    //               <Form.Label>New password</Form.Label>
+    //               <Form.Control type="password" />
+    //             </Form.Group>
+    //             <Form.Group className="mb-3">
+    //               <Form.Label>Confirm password</Form.Label>
+    //               <Form.Control type="password" />
+    //             </Form.Group>
+    //             <Button variant="primary" onClick={handlePasswordSubmit} >Save password</Button>
+    //           </Form>
+    //         </Card.Body>
+    //       </Card>
+    //     </Tab>
+    //   </Tabs>
+    // </div>
+    <div className="pe-lg-14">
             <div>
                 <h5 className="mb-4">Update Profile</h5>
                 <form className="row row-cols-1 row-cols-lg-2 needs-validation" noValidate onSubmit={handleProfileSubmit}>

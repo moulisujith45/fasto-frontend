@@ -22,6 +22,7 @@ export const startGetUserCart = () => {
                     Authorization : localStorage.getItem('token')
                 }
             })
+            console.log(response.data,"i need cart id")
             dispatch(getUserCart(response.data))
             
         }catch(e){

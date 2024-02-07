@@ -20,8 +20,6 @@ const AdminNavbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
     useEffect(() => {
-      
-      
       if (token) {
         try {
           const { role } = jwtDecode(token);
@@ -40,7 +38,7 @@ const AdminNavbar = () => {
           console.log("Invalid or expired token");
         }
       }
-    }, [token]); // Update the dependency array // Update the dependency array
+    }, [token]); // Update the dependency array
 
   const handleLogout = () => {
     setRole("")
