@@ -5,16 +5,16 @@ export const newOrder = (cart) => ({
     payload : cart
 })
 
-export const startNewOrder = (cart) => {
-    console.log(cart,"startNewOrder")
+export const startNewOrder = (totalPrice) => {
+    console.log(totalPrice,"startNewOrder")
     return async (dispatch) => {
         try{
-            const response = await axios.post('/api/user/order',cart,{
+            const response = await axios.post('/api/user/order',{"total":totalPrice},{
                 headers : {
                     Authorization : localStorage.getItem('token')
                 }
             })
-            dispatch(newOrder(cart))
+            dispatch(newOrder(totalPrice))
         }catch(err){
             console.log(err)
         }
