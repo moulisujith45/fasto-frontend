@@ -30,7 +30,7 @@ export default function Orders(){
         }
     } )
     const handlePay = () => {
-
+        dispatch(startNewOrder(Math.ceil(totalPrice)))
     }
 
     return(
@@ -57,7 +57,7 @@ export default function Orders(){
             </div>
             <div className="order-price">
                 <h2>Order Price</h2>
-                <p>Total Price: ${totalPrice.toFixed(2)} </p>
+                <p>Total Price: ${Math.ceil(totalPrice)} </p>
                 <p>Total Quantity : {totalQuantity} </p>
                 <button onClick={handlePay} >Pay</button>
             </div>
