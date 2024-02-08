@@ -34,9 +34,9 @@ export default function Register({registerToast}){
     } else if(password.trim().length < 8 || password.trim().length > 128){
       errors.password = "passeword should be betweeen 8 - 128  characters"
     }
-    if (mobile.trim().length === 0) {
-      errors.mobile = "Mobile number is required";
-    } 
+    // if (mobile.trim().length === 0) {
+    //   errors.mobile = "Mobile number is required";
+    // } 
       setFormErrors(errors)
   }
   const handleSubmit = async(e) => {
