@@ -24,6 +24,8 @@ import {startGetCategory} from "./actions/categoryAction"
 import { startGetUserCart } from './actions/cartAction';
 import ForgotPassword from './Components/UserProfile/ForgotPassword';
 import ResetPassword from './Components/UserProfile/ResetPassword';
+import Success from './Components/Payment/Success';
+import Cancel from './Components/Payment/Cancel';
 
 function App(){
   const dispatch = useDispatch();
@@ -68,6 +70,8 @@ useEffect(() => {
         <Route path='/display-address' element={<DisplayAddress/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
         <Route path="/resetPassword/:id/:token" element={<ResetPassword/>}/>
+        <Route path="/success" element={<Success/>}/>
+        <Route path="/cancel" element={<Cancel/>}/>
       </Routes>
 
     </div>
