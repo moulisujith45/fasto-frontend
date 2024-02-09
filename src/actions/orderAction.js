@@ -14,7 +14,7 @@ export const startNewOrder = (totalPrice) => {
                     Authorization : localStorage.getItem('token')
                 }
             })
-            dispatch(newOrder(totalPrice))
+            dispatch(newOrder(response.data))
         }catch(err){
             console.log(err)
         }
