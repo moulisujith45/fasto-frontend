@@ -17,7 +17,7 @@ export default function DisplayAddress() {
 
   useEffect(() => {
     dispatch(startGetAddress());
-  }, []); // Use an empty dependency array to fetch addresses only on mount
+  }, [dispatch]); // Use an empty dependency array to fetch addresses only on mount
 
   console.log(addressDetails, "i am address");
   const handleProceed = () => {

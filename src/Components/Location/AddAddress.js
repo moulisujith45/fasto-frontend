@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch ,useSelector} from "react-redux";
 import { startAddAddress,startEditAddress } from "../../actions/addressAction";
 import { Form, Button } from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
 
 
 export default function AddAddress() {
@@ -12,7 +12,7 @@ export default function AddAddress() {
     return state.address;
   });
   console.log(addressDetails,"its kasta")
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [addressData, setAddressData] = useState({
     building: addressDetails && addressDetails.building ? addressDetails.building : "",
