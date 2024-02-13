@@ -26,6 +26,8 @@ import ForgotPassword from './Components/UserProfile/ForgotPassword';
 import ResetPassword from './Components/UserProfile/ResetPassword';
 import Success from './Components/Payment/Success';
 import Cancel from './Components/Payment/Cancel';
+import MapComponent from './Components/CustomerComponent/map';
+import { startGetAddress } from './actions/addressAction';
 
 function App(){
   const dispatch = useDispatch();
@@ -43,6 +45,10 @@ function App(){
 useEffect(() => {
   dispatch(startGetProduct());
 }, [dispatch]);
+
+useEffect(() => {
+  dispatch(startGetAddress())
+})
 
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)
@@ -72,6 +78,7 @@ useEffect(() => {
         <Route path="/resetPassword/:id/:token" element={<ResetPassword/>}/>
         <Route path="/success" element={<Success/>}/>
         <Route path="/cancel" element={<Cancel/>}/>
+        <Route path='/map' element={<MapComponent/>} />
       </Routes>
 
     </div>

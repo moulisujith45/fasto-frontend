@@ -5,8 +5,9 @@ import { startNewOrder } from "../actions/orderAction"
 import { startGetProduct } from "../actions/productAction"
 import { startGetUserCart } from "../actions/cartAction"
 import { startGetAddress } from "../actions/addressAction"
-
+import { useNavigate } from "react-router-dom"
 export default function Orders(){
+    const naviagte = useNavigate()
     const dispatch = useDispatch()
     const [order,setOrder] = useState(null)
     const cart = useSelector((state) => state.cart.data)
@@ -32,10 +33,16 @@ export default function Orders(){
     const handlePay = () => {
         dispatch(startNewOrder(Math.ceil(totalPrice)))
     }
+    const handleMap = () => {
+        naviagte("/map")
+    }
 
     return(
         <div className="order-container">
             <div>
+                <div>
+                    <button onClick={handleMap}>Map</button>
+                </div>
                 <di>
                    {cart.map((item,index) => {
                     const product = products.find((product) => product._id === item.productId)
@@ -62,5 +69,6 @@ export default function Orders(){
                 <button onClick={handlePay} >Pay</button>
             </div>
         </div>
+
     )
 }
