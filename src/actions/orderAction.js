@@ -67,17 +67,17 @@ export const startPayment = (card)=>{
 //         }
 //     }
 // }
-// const setStartPayment = (data)=>{
-//     if(data){
-//         localStorage.setItem("stripeId",data.id)
-//         window.location = data.url
-//     }
-//     return{
-//         type:"CREATE_PAYMENT_TRUE",
-//         paylaod:data
-//     }
+const setStartPayment = (data)=>{
+    if(data){
+        localStorage.setItem("stripeId",data.id)
+        window.location = data.url
+    }
+    return{
+        type:"CREATE_PAYMENT_TRUE",
+        paylaod:data
+    }
 
-// }
+}
 
 export const getOrder = (payload) => ({
     type: "GET_ORDER",

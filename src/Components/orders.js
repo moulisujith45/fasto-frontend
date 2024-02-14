@@ -5,12 +5,8 @@ import { startNewOrder } from "../actions/orderAction"
 import { startGetProduct } from "../actions/productAction"
 import { startGetUserCart } from "../actions/cartAction"
 import { startGetAddress } from "../actions/addressAction"
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom"
-=======
 import axios from "../config/axios"
-
->>>>>>> 6a8f20ef596a85a08bf33b0c11972faf6aa7cc97
 export default function Orders(){
     const naviagte = useNavigate()
     const dispatch = useDispatch()
