@@ -28,6 +28,11 @@ import Success from './Components/Payment/Success';
 import Cancel from './Components/Payment/Cancel';
 import MapComponent from './Components/CustomerComponent/map';
 import { startGetAddress } from './actions/addressAction';
+import GetDelivery from './Components/AdminComponent/GetDelivery';
+
+
+
+
 
 function App(){
   const dispatch = useDispatch();
@@ -79,6 +84,7 @@ useEffect(() => {
         <Route path="/success" element={<Success/>}/>
         <Route path="/cancel" element={<Cancel/>}/>
         <Route path='/map' element={<MapComponent/>} />
+        <Route path='/delivery' element={<GetDelivery/>} />
       </Routes>
 
     </div>
