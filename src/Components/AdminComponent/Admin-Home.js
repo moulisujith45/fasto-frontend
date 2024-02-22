@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../Navbar/AdminNavbar';
+import { Button } from 'react-bootstrap';
 
 function AdminHome ()  {
      const navigate= useNavigate()
@@ -18,11 +19,15 @@ function AdminHome ()  {
 
   // }
 
+  const handledelivery= () => {
+    navigate('/delivery')
+  }
+
   return (
       <div>
 
-        {/* Rest of your admin dashboard content */}
         <h2>Welcome to the Admin Dashboard</h2>
+        <Button onClick={handledelivery}> See All deliveryman</Button>
       </div>
 
   );
