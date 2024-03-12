@@ -32,6 +32,12 @@ const cartReducer = (state = cartInitialState,action) => {
         case "REMOVE_CART" : {
             return {...state, data: state.data.filter(ele => ele._id !== action.payload)}
         }
+        case "EMPTY_CART" : {
+            return {
+                ...state,
+                data: [], // Set cart data to an empty array
+            };
+        }
         default :{
             return {...state}
         }

@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { startGetUserCart ,startAddCart, StartRemoveCart, StartIncQuantity, StartDecQuantity} from "../../actions/cartAction";
+import { startGetUserCart ,startAddCart, StartRemoveCart, StartIncQuantity, StartDecQuantity, StartEmptyCart} from "../../actions/cartAction";
 import { startGetProduct } from "../../actions/productAction";
 import {useNavigate} from 'react-router-dom'
+import axios from "../../config/axios";
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.data)
@@ -40,12 +41,33 @@ const Cart = () => {
             dispatch(StartDecQuantity(productId));
         }
     }
+    // const handleEmpty = async () => {
+    //     try {
+    //         await axios.delete("/api/user/cart/empty", {
+    //             headers: {
+    //                 Authorization: localStorage.getItem('token')
+    //             }
+    //         });
+    //         setCartItems([]); // Empty the cart items in the state
+    //     } catch (error) {
+    //         console.error('Error emptying the cart:', error);
+    //     }
+    // };
+
+    // // Call the function to empty the cart
+    // handleEmpty();
+    const handleEmpty = () => {
+        dispatch((StartEmptyCart()))
+    }
 
     return (
         <div>
         <div className="row">
             <div className="col">
                 <button type="button" className="btn btn-outline-primary" onClick={handleProceed}>Proceed</button>
+            </div>
+            <div className="col">
+                <button type="button" className="btn btn-outline-primary" onClick={handleEmpty}>Clear</button>
             </div>
         </div>
         <div className="row row-cols-1 row-cols-md-4 g-3">

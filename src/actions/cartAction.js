@@ -99,15 +99,35 @@ export const StartDecQuantity = (id) => {
         }
     }
 }
+const emptyCart = (id) => {
+    console.log('payload')
+    return{
+        type:"EMPTY_CART",
+        payload:id
+    }
+}
 
+export const StartEmptyCart = () => {
+    console.log('startempty')
+    return async(dispatch) => {
+        try{
+            await axios.put("/api/user/cart/empty",null,{
+                headers : {
+                    Authorization : localStorage.getItem('token')
+                }
+            })
+            dispatch(emptyCart())
+        }catch(e){
+            console.log(e)
+        }
+    }
+}
 const removeCart = (id) => {
     return{
         type:"REMOVE_CART",
         payload:id
     }
 }
-
-
 export const StartRemoveCart = (id) => {
     return async(dispatch) => {
         if(id){
@@ -124,8 +144,6 @@ export const StartRemoveCart = (id) => {
             console.log(e)
         }
     }
-
-
 }
 
 
