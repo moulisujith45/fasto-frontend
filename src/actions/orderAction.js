@@ -98,3 +98,22 @@ export const startGetOrder = () => {
         }
     }
 }
+
+export const getAllOrders = (payload) => ({
+    type: "GET_ALL_ORDERS",
+    payload : payload
+})
+
+export const startGetAllOrders = () => {
+    return async(dispatch) => {
+        try{
+            const response = await axios.get('/api/listAllOrders',{
+                headers : {
+
+                }
+            })
+        }catch(e){
+            console.log(e)
+        }
+    }
+}

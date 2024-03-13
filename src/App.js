@@ -9,7 +9,6 @@ import Login from "./Components/Login"
 import AdminHome from './Components/AdminComponent/Admin-Home';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
 import AddCategory from './Components/AdminComponent/Category/AddCategory';
-import MyCart from './Components/MyCart';
 import Orders from './Components/orders';
 import CustomerProfile from './Components/UserProfile/CustomerProfile';
 import AddProduct from './Components/AdminComponent/Product/AddProduct';
@@ -29,6 +28,7 @@ import Cancel from './Components/Payment/Cancel';
 import MapComponent from './Components/CustomerComponent/map';
 import { startGetAddress } from './actions/addressAction';
 import GetDelivery from './Components/AdminComponent/GetDelivery';
+import Myorders from './Components/Myorders';
 
 
 
@@ -71,7 +71,7 @@ useEffect(() => {
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
         <Route path='/addcategories' element={<AddCategory/>}/>
-        <Route path='/mycart' element={<MyCart/>}/>
+        <Route path='/myorder' element={<Myorders/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
         <Route path='/addproducts' element={<AddProduct/>}/>
