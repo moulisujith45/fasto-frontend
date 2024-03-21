@@ -3,9 +3,10 @@ import { ToastContainer } from 'react-bootstrap'
 import axios from '../../config/axios'
 import {Link} from "react-router-dom"
 import { toast } from 'react-toastify'
-
+import { useNavigate } from 'react-router-dom'
 
 function Success() {
+  const navigate = useNavigate()
   useEffect(()=>{
     (async()=>{
       try{
@@ -17,8 +18,8 @@ function Success() {
             }
         })
         if(response) localStorage.removeItem("stripeId")
+        navigate('/')
         
-
 
       }catch(err){
         console.log(err)

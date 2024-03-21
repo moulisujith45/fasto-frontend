@@ -28,10 +28,7 @@ import Cancel from './Components/Payment/Cancel';
 import MapComponent from './Components/CustomerComponent/map';
 import { startGetAddress } from './actions/addressAction';
 import GetDelivery from './Components/AdminComponent/GetDelivery';
-import Myorders from './Components/Myorders';
-
-
-
+import GetOrder from './Components/AdminComponent/GetOrder';
 
 
 function App(){
@@ -71,7 +68,6 @@ useEffect(() => {
         <Route path="/register" element={<Register/>} />
         <Route path='/admin' element={<AdminHome/>}/>
         <Route path='/addcategories' element={<AddCategory/>}/>
-        <Route path='/myorder' element={<Myorders/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/customerprofile' element={<CustomerProfile/>}/>
         <Route path='/addproducts' element={<AddProduct/>}/>
@@ -85,6 +81,7 @@ useEffect(() => {
         <Route path="/cancel" element={<Cancel/>}/>
         <Route path='/map' element={<MapComponent/>} />
         <Route path='/delivery' element={<GetDelivery/>} />
+        <Route path='/admin/order' element={<GetOrder/>}/>
       </Routes>
 
     </div>
