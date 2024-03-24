@@ -92,6 +92,7 @@ export const startGetOrder = () => {
                     Authorization : localStorage.getItem('token')
                 }
             })
+            
             dispatch(getOrder(response.data))
         }catch(e){
             console.log(e)
@@ -99,21 +100,31 @@ export const startGetOrder = () => {
     }
 }
 
-export const getAllOrders = (payload) => ({
-    type: "GET_ALL_ORDERS",
-    payload : payload
-})
 
+// export const getAllOrders = (data) => {
+//     console.log('hello',data)
+//     return {
+//         type: "GET_ALL_ORDERS",
+//         payload : data
+//     }
+// }
+export const getAllOrders = (data) => ({
+    type : "GET_ALL_ORDERS",
+    payload: data
+})
 export const startGetAllOrders = () => {
     return async(dispatch) => {
         try{
             const response = await axios.get('/api/listAllOrders',{
                 headers : {
-
+                    Authorization : localStorage.getItem('token')
                 }
             })
-        }catch(e){
-            console.log(e)
+            console.log(response.data,"rama")
+            dispatch(getAllOrders(response.data))
+           
+        }catch(err){
+            console.log(err)
         }
     }
 }
