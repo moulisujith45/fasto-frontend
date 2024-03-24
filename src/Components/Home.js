@@ -6,13 +6,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { startGetUserCart } from "../actions/cartAction";
 
+const ITEMS_PER_PAGE = 8; // Set the number of items per page
+
 export default function Home() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart.data);
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
+        dispatch(startGetProduct(currentPage));
         dispatch(startGetUserCart());
-    }, [dispatch]);
+    }, [dispatch, currentPage]);
+
     const incrementQuantity = (id) => {
         dispatch(StartIncQuantity(id));
     };
@@ -64,44 +70,56 @@ export default function Home() {
         return item ? item.quantity : 0;
     }
 
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
     return (
         <div>
-        <div className="row row-cols-1 row-cols-md-4 g-3">
-            {products.map((product) => (
-                <div key={product._id} className="col d-flex" style={{ maxWidth: '390px' }}>
-                     <div className="card card-product flex-grow-1" style={{ maxWidth: '390px' }}>
-                        <div className="card-body ">
-                            <div className="text-center position-relative">
-                            <img src={`http://localhost:3040/images/${product.image}`} style={{width:"180px",height:"120px"}} alt={product.name} className="mb-3 img-fluid" />
-                            </div>
-                        <h2 className="fs-6">
-                        <a href="#!" className="text-inherit text-decoration-none">{product.name}</a>
-                        </h2>
-                            <div className="d-flex justify-content-between align-items-center mt-3">
-                                <div>
-                                <span className="text-dark">${product.price}</span>
+            <div className="row row-cols-1 row-cols-md-4 g-3">
+                {products.map((product) => (
+                    <div key={product._id} className="col d-flex" style={{ maxWidth: '390px' }}>
+                        <div className="card card-product flex-grow-1" style={{ maxWidth: '390px' }}>
+                            <div className="card-body ">
+                                <div className="text-center position-relative">
+                                    <img src={`http://localhost:3040/images/${product.image}`} style={{ width: "180px", height: "120px" }} alt={product.name} className="mb-3 img-fluid" />
                                 </div>
+                                <h2 className="fs-6">
+                                    <a href="#!" className="text-inherit text-decoration-none">{product.name}</a>
+                                </h2>
+                                <div className="d-flex justify-content-between align-items-center mt-3">
+                                    <div>
+                                        <span className="text-dark">${product.price}</span>
+                                    </div>
 
-                            {itemInCart(product) ? (
-                                <>
-                                    <button className="btn btn-outline-primary btn-sm me-1" onClick={() => increment(product)}>+</button>
-                                    <span className="mx-2">{getItemQuantity(product._id)}</span>
-                                    <button className="btn btn-outline-primary btn-sm me-1"  onClick={() => decrement(product)}>-</button>
-                                </>
-                            ) : (
-                                    <button onClick={() => addToCart(product)}>Add to Cart</button>
-                                )
-                            }
+                                    {itemInCart(product) ? (
+                                        <>
+                                            <button className="btn btn-outline-primary btn-sm me-1" onClick={() => increment(product)}>+</button>
+                                            <span className="mx-2">{getItemQuantity(product._id)}</span>
+                                            <button className="btn btn-outline-primary btn-sm me-1" onClick={() => decrement(product)}>-</button>
+                                        </>
+                                    ) : (
+                                            <button onClick={() => addToCart(product)}>Add to Cart</button>
+                                        )
+                                    }
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+            <div>
+                <button onClick={handlePreviousPage}>Previous</button>
+                <span>Page {currentPage}</span>
+                <button onClick={handleNextPage}>Next</button>
+            </div>
         </div>
-    </div>
     );
 }
-
-
-
