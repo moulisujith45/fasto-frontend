@@ -5,11 +5,12 @@ import { useEffect, useState} from "react"
 import { startEditProduct, startGetProduct, startRemoveProduct } from "../../../actions/productAction"
 const ProductList = (props) => {
 
-    const [editId, setEditId] = useState(false)
+    const [editId, setEditId] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
+    const [isEdit, setIsEdit] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -44,6 +45,17 @@ const ProductList = (props) => {
         setEditId('')
     }
 
+    useEffect(() => { 
+        if(editId){
+        const item = product.find(ele => ele._id === editId )
+        if(Object.keys(item.length>0)){
+        setName(item.name)
+        setDescription(item.description)
+        setPrice(item.price)
+        setStock(item.stock)}
+}
+    },[editId])
+
     
 
 
@@ -59,9 +71,7 @@ const ProductList = (props) => {
                         <button onClick={() => {
                             handleDelete(ele._id)
                         }}>Delete</button>
-                        <button onClick={() => {
-                            handleEdit(ele._id)
-                        }}>Edit</button>
+                        <button onClick={() => {handleEdit(ele._id)}}>Edit</button>
                     </div>
                         )
                 })}
