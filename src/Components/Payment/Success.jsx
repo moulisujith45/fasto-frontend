@@ -19,6 +19,16 @@ function Success() {
         })
         if(response) localStorage.removeItem("stripeId")
         navigate('/')
+        toast.success('order is successfull', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+      });
         
 
       }catch(err){

@@ -1,17 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { startGetUserCart ,startAddCart, StartRemoveCart, StartIncQuantity, StartDecQuantity, StartEmptyCart} from "../../actions/cartAction";
-import { startGetProduct } from "../../actions/productAction";
+import { startGetAllProducts } from "../../actions/productAction";
 import {useNavigate} from 'react-router-dom'
 import axios from "../../config/axios";
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.data)
+    console.log(cart,'this iscart')
+    // const products = useSelector((state) => state.products)
     const products = useSelector((state) => state.product)
+    console.log(products,"web")
     const [cartItems,setCartItems] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    
     const removeCart = (productId) => {
         dispatch(StartRemoveCart(productId))
     }
@@ -26,7 +29,8 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(startGetUserCart());
-        dispatch(startGetProduct());
+        dispatch(startGetAllProducts());
+        
     }, [dispatch]);
 
     const  incrementQuantity = (productId) =>{
@@ -59,7 +63,7 @@ const Cart = () => {
     const handleEmpty = () => {
         dispatch((StartEmptyCart()))
     }
-
+    console.log(products,'inCart')
     return (
         <div>
         <div className="row">
@@ -76,6 +80,7 @@ const Cart = () => {
                 if (!product) {
                     return <div key={index}>Product not found</div>;
                 }
+                
                 return (
                     <div key={index} className="col d-flex" style={{ maxWidth: '390px' }}>
                         <div className="card card-product flex-grow-1" style={{ maxWidth: '390px' }}>
@@ -88,7 +93,7 @@ const Cart = () => {
                                 </h2>
                                 <div className="d-flex justify-content-between align-items-center mt-3">
                                     <div>
-                                        <span className="text-dark">${product.price}</span>
+                                        <span className="text-dark">₹{product.price}</span>
                                     </div>
                                     <div>
                                         <button className="btn btn-outline-primary btn-sm me-1" onClick={() => decrementQuantity(item.productId)}>-</button>

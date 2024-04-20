@@ -16,7 +16,7 @@ import Cart from './Components/CustomerComponent/cart';
 import UserProfile from './Components/UserProfile/UserProfile';
 import UserSideBar from './Components/UserProfile/UserSideBar';
 import { useDispatch, useSelector } from "react-redux";
-import { startGetProduct } from './actions/productAction';
+import { startGetAllProducts, startGetProduct } from './actions/productAction';
 import AddAddress from './Components/Location/AddAddress';
 import DisplayAddress from './Components/Location/DisplayAddress';
 import {startGetCategory} from "./actions/categoryAction"
@@ -38,19 +38,24 @@ function App(){
 
   useEffect(() => {
     dispatch(startGetCategory())
+    dispatch(startGetUserCart())
+    dispatch(startGetProduct())
+    dispatch(startGetAddress())
+    dispatch(startGetAllProducts())
+    // (startGetAddress(dispatch))
   },[dispatch])
 
-  useEffect(() => {
-    dispatch(startGetUserCart());
-}, [dispatch])
+//   useEffect(() => {
+//     dispatch(startGetUserCart());
+// }, [dispatch])
 
-useEffect(() => {
-  dispatch(startGetProduct());
-}, [dispatch]);
+// useEffect(() => {
+//   dispatch(startGetProduct());
+// }, [dispatch]);
 
-useEffect(() => {
-  dispatch(startGetAddress())
-})
+// useEffect(() => {
+//   (startGetAddress(dispatch))
+// })
 
   const handleLogin = () => {
     SetIsLoggedIn(!isLoggedIn)

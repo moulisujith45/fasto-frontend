@@ -10,14 +10,17 @@ const ITEMS_PER_PAGE = 8; // Set the number of items per page
 
 export default function Home() {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.product);
+    const products = useSelector((state) => state.pagination.pagination.data);
     const cart = useSelector((state) => state.cart.data);
     const [currentPage, setCurrentPage] = useState(1);
-
+    const [search,setSearch] = useState('')
+    const [limit,setLimit] = useState(8)
+    const [order,setOrder] = useState(-1)
+    
     useEffect(() => {
-        dispatch(startGetProduct(currentPage));
+        dispatch(startGetProduct(search,limit,currentPage,order));
         dispatch(startGetUserCart());
-    }, [dispatch, currentPage]);
+    }, [ currentPage]);
 
     const incrementQuantity = (id) => {
         dispatch(StartIncQuantity(id));
@@ -82,20 +85,20 @@ export default function Home() {
 
     return (
         <div>
-            <div className="row row-cols-1 row-cols-md-4 g-3">
-                {products.map((product) => (
-                    <div key={product._id} className="col d-flex" style={{ maxWidth: '390px' }}>
-                        <div className="card card-product flex-grow-1" style={{ maxWidth: '390px' }}>
+            <div className="row row-cols-1 row-cols-md-4 g-3" style={{maxWidth:'100%'}}>
+                {Array.isArray(products) && products.map((product) => (
+                    <div key={product._id} className="col d-flex" style={{ maxWidth: '370px',height: "220px" }}>
+                        <div className="card card-product flex-grow-1" style={{ maxWidth: '370px',height: "220px" }}>
                             <div className="card-body ">
                                 <div className="text-center position-relative">
-                                    <img src={`http://localhost:3040/images/${product.image}`} style={{ width: "180px", height: "120px" }} alt={product.name} className="mb-3 img-fluid" />
+                                    <img src={`http://localhost:3040/images/${product.image}`} style={{ width: "180px", height: "100px" }} alt={product.name} className="mb-3 img-fluid" />
                                 </div>
                                 <h2 className="fs-6">
                                     <a href="#!" className="text-inherit text-decoration-none">{product.name}</a>
                                 </h2>
                                 <div className="d-flex justify-content-between align-items-center mt-3">
                                     <div>
-                                        <span className="text-dark">${product.price}</span>
+                                        <span className="text-dark">₹{product.price}</span>
                                     </div>
 
                                     {itemInCart(product) ? (

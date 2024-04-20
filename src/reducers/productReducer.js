@@ -6,6 +6,7 @@ const productReducer = (state = productInitialState, action) => {
             return [...state, {...action.payload}]
         }
         case "GET_PRODUCT":{
+            // console.log(action.payload,'reducerproduct')
             return [...action.payload]
         }
         case "REMOVE_PRODUCT":{
@@ -19,6 +20,9 @@ const productReducer = (state = productInitialState, action) => {
                     return{...ele}
                 }
             }) 
+        }
+        case "GET_ALLPRODUCTS" :{
+            return [...action.payload]
         }
         default:{
             return [...state]

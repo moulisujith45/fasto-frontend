@@ -52,7 +52,7 @@ const AdminNavbar = () => {
   console.log("role1",role)
   return (
   
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg  d-flex flex-row flex-wrap navbar-light bg-light" style={{maxWidth:'100%',maxHeight:'120px',height:'90px'}}>
       <div className="container-fluid">
         {/* <Link to="/admin" className="navbar-brand">Admin Dashboard</Link> */}
         <nav className="navbar bg-body-tertiary">

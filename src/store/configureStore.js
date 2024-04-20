@@ -6,6 +6,8 @@ import cartReducer from '../reducers/cartReducer'
 import addressReducer from '../reducers/addressReducer'
 import orderReducer from '../reducers/orderReducer'
 import deliveryReducer from '../reducers/deliveryReducer'
+import { Pagination } from 'reactstrap'
+import sort from '../reducers/sortsearchReducer'
 const configureStore = () => {
     const store = createStore(combineReducers({
         category: categoryReducer,
@@ -13,7 +15,10 @@ const configureStore = () => {
         cart :cartReducer,
         address: addressReducer,
         order : orderReducer,
-        delivery : deliveryReducer
+        delivery : deliveryReducer,
+        pagination:sort
+        
+
     }), applyMiddleware(thunk))
     return store
 }

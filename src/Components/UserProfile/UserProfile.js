@@ -1,9 +1,10 @@
 import axios from "../../config/axios";
 import { useEffect, useState } from "react";
-import { Tab, Tabs, Card, Button, Form } from "react-bootstrap";
+import { Tab, Tabs, Card, Button, Form ,Table} from "react-bootstrap";
 const UserProfile = () => {
     const [key, setKey] = useState("account");
    const [user,setUser] = useState({})
+   const [orders,setOrders] = useState([])
     const [password, setPassword] = useState({
         currentPassword: "",
         newPassword: "",
@@ -14,13 +15,23 @@ const UserProfile = () => {
         //get user data from the server and update user data
         const getUserData = async () => {
             try{
-                const response = await axios.get('/api/user/getSingleProfile', {
+                const UserResponse = await axios.get('/api/user/getSingleProfile', {
                     headers: {
                         Authorization: localStorage.getItem('token')
                     }
                 });
-                setUser(response.data)
-                console.log("User data from server:", response.data)
+                setUser(UserResponse.data)
+                console.log("User data from server:", UserResponse.data)
+
+                const OrdersResponse = await axios.get('/api/user/userOrder',{
+                    headers : {
+                        Authorization : localStorage.getItem('token')
+                    }
+                })
+                // setOrders(OrdersResponse.data)
+                setOrders(Object.values(OrdersResponse.data))
+                console.log("orders:",Object.values(OrdersResponse.data))
+                
             }catch(error){
                 console.log(error)
             }
@@ -128,6 +139,39 @@ const UserProfile = () => {
                    </Card.Body>
                </Card>
             </Tab>
+            {/* <Tab eventKey="allorders" title="AllOrders">
+                <Card>
+                    <Card.Body>
+                       
+                    </Card.Body>
+                </Card>
+            </Tab> */}
+             <Tab eventKey="allorders" title="AllOrders">
+                    <Card>
+                        <Card.Body>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {orders.map((order, index) => (
+                                        <tr key={order._id}>
+                                            <td>{index + 1}</td>
+                                            <td>{order.total}</td>
+                                            <td>{order.status}</td>
+                                            <td>{order.paymentStatus ? 'Paid' : 'Pending'}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Card.Body>
+                    </Card>
+                </Tab>
            </Tabs>
        </div>
 

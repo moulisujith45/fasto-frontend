@@ -1,7 +1,7 @@
 import { useState ,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { startNewOrder } from "../actions/orderAction"
-import { startGetProduct } from "../actions/productAction"
+import { startGetAllProducts } from "../actions/productAction"
 import { startGetUserCart } from "../actions/cartAction"
 import { startGetAddress } from "../actions/addressAction"
 import { useNavigate } from "react-router-dom"
@@ -17,7 +17,7 @@ export default function Orders() {
 
     useEffect(() => {
         dispatch(startGetAddress())
-        dispatch(startGetProduct())
+        dispatch(startGetAllProducts())
         dispatch(startGetUserCart())
     }, [dispatch])
 
@@ -79,7 +79,6 @@ export default function Orders() {
                         return <div key={index} className="cart-item"></div>
                     }
                     return (
-                        
                         <div key={index} className="col d-flex" style={{ maxWidth: '390px' }}>
                             <div className="card card-product flex-grow-1" style={{ maxWidth: '390px' }}>
                                 <div className="card-body">
@@ -91,7 +90,7 @@ export default function Orders() {
                                     </h2>
                                     <div className="d-flex justify-content-between align-items-center mt-3">
                                         <div>
-                                            <span className="text-dark">${product.price}</span>
+                                            <span className="text-dark">₹{product.price}</span>
                                         </div>
                                     <div>
                                         <p>Quantity : {item.quantity}</p>
@@ -100,18 +99,15 @@ export default function Orders() {
                             </div>
                         </div>
                     </div>
-
                     )
                 })}
             </div>
-
             {/* Rendering Order Price */}
             <div className="order-price">
                 <h2>Order Price</h2>
-                <p>Total Price: ${Math.ceil(totalPrice)}</p>
+                <p>Total Price: ₹{Math.ceil(totalPrice)}</p>
                 <p>Total Quantity : {totalQuantity}</p>
             </div>
-
             {/* Button to Proceed to Payment */}
             <button onClick={handlePaymentProceed}>Proceed to pay</button>
         </div>

@@ -21,19 +21,47 @@ export const startAddProduct = (data) => {
         }
     }
 }
-
-const getProduct = (data) => {
+const getAllProducts = (data) => {
+    console.log(data,"sujith")
     return{
-        type: 'GET_PRODUCT',
+        
+        type: 'GET_ALLPRODUCTS',
         payload: data
     }
 }
 
-export const startGetProduct = () => {
-    return async(dispatch)=> {
+export const startGetAllProducts = (search,limit,page,order) => {
+    return async(dispatch) => {
         try{
-            const response = await axios.get('/api/getAllProducts')
+            const response = await axios.get('/api/listAllProducts')
+            dispatch(getAllProducts(response.data))
+            console.log(response.data,'allproducts')
+        }catch(e){
+            console.log(e)
+        }
+    }
+}
+
+
+const getProduct = (data) => {
+    return{
+        type: 'GET_PAGINATION',
+        payload: data
+    }
+}
+
+
+export const startGetProduct = (search,limit,page,order) => {
+    return async(dispatch)=> {
+        console.log(search,"search")
+        console.log(limit,"limit")
+        console.log(page,"page")
+        console.log(order,"order")
+        try{
+            // const response = await axios.get('/api/getAllProducts')
+            const response = await axios.get(`/api/getAllProducts?search=${search}&limit=${limit}&page=${page}&order=${order}`)
             dispatch(getProduct(response.data))
+            console.log(response.data,'pagina')
         } catch(e){
             console.log(e)
         }
